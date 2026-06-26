@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Регистрация и настройка перед созданием сайта</title>
+    <meta
+      name="description"
+      content="Пошаговый гайд для новичков: Claude, подписка, GitHub, GitHub token и настройка Claude Code перед тренингом."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="top">
+      <section class="hero setup-hero screen is-screen-active" data-screen="home">
+        <div class="hero-copy">
+          <p class="eyebrow">Подготовка перед тренингом</p>
+          <h1>Регистрация и настройка перед созданием сайта</h1>
+          <p class="lead">
+            Пройдите подготовительные шаги: аккаунт Claude или ChatGPT,
+            <button class="term" type="button" data-term="subscription">подписка</button>,
+            <button class="term" type="button" data-term="github">GitHub</button>,
+            <button class="term" type="button" data-term="token">GitHub token</button> и настройка
+            <button class="term" type="button" data-term="claude-code">Claude Code</button> или
+            <button class="term" type="button" data-term="codex">Codex</button>.
+            После этого можно
+            спокойно начинать практику.
+          </p>
+          <div class="hero-actions">
+            <button class="button primary" type="button" data-next-screen>
+              Начать
+            </button>
+          </div>
+        </div>
+        <img
+          class="hero-image"
+          src="assets/workflow-hero.png"
+          alt="Визуальная схема подготовки аккаунтов и публикации сайта"
+        />
+      </section>
+
+      <section class="setup-plan screen" data-screen="plan" aria-label="Общий план настройки">
+        <div class="section-heading">
+          <p class="eyebrow">Общий план</p>
+          <h2>Что нужно подготовить</h2>
+          <p>
+            Это не урок по созданию проекта. Это чеклист подготовки, чтобы на
+            тренинге не тратить время на доступы и настройки.
+          </p>
+        </div>
+
+        <ol class="plan-grid">
+          <li>
+            <span>1</span>
+            <strong>Claude или ChatGPT</strong>
+            <p>Создать аккаунт в одном из сервисов.</p>
+          </li>
+          <li>
+            <span>2</span>
+            <strong><button class="term inline-term" type="button" data-term="subscription">Подписка</button></strong>
+            <p>Claude Pro или ChatGPT Plus: примерно $20/месяц.</p>
+          </li>
+          <li>
+            <span>3</span>
+            <strong>Аккаунт <button class="term inline-term" type="button" data-term="github">GitHub</button></strong>
+            <p>Создать аккаунт и подтвердить почту.</p>
+          </li>
+          <li>
+            <span>4</span>
+            <strong><button class="term inline-term" type="button" data-term="token">GitHub token</button></strong>
+            <p>Сгенерировать token и сохранить его безопасно.</p>
+          </li>
+          <li>
+            <span>5</span>
+            <strong><button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button></strong>
+            <p>Подключить инструмент для работы с кодом.</p>
+          </li>
+        </ol>
+
+        <div class="screen-actions">
+          <button class="button secondary" type="button" data-prev-screen>
+            Назад
+          </button>
+          <button class="button primary" type="button" data-next-screen>
+            Выбрать инструмент
+          </button>
+        </div>
+      </section>
+
+      <section class="choice-screen screen" data-screen="choice" aria-label="Выбор инструмента">
+        <div class="section-heading">
+          <p class="eyebrow">Выбор пути</p>
+          <h2>С чем будете работать?</h2>
+          <p>
+            Выберите один вариант. После выбора инструкция подстроится под
+            нужный инструмент: <button class="term" type="button" data-term="claude-code">Claude Code</button> для Claude или <button class="term" type="button" data-term="codex">Codex</button> для ChatGPT.
+          </p>
+        </div>
+
+        <div class="choice-grid">
+          <article class="choice-card">
+            <span class="choice-badge">Рекомендуется</span>
+            <h3>Claude + Claude Code</h3>
+            <p>
+              Claude - чат с ИИ. <button class="term" type="button" data-term="claude-code">Claude Code</button> - инструмент Claude для работы с
+              кодом: он читает файлы, пишет код и помогает собирать проект.
+            </p>
+            <a class="official-link" href="https://claude.ai/" target="_blank" rel="noreferrer">
+              Официальный сайт Claude
+            </a>
+            <button class="button primary" type="button" data-provider="claude">
+              Выбрать Claude
+            </button>
+          </article>
+
+          <article class="choice-card">
+            <span class="choice-badge alt-badge">Альтернатива</span>
+            <h3>ChatGPT + Codex</h3>
+            <p>
+              ChatGPT - чат с ИИ. <button class="term" type="button" data-term="codex">Codex</button> - инструмент OpenAI/ChatGPT для работы
+              с кодом: помогает писать, менять и проверять проект.
+            </p>
+            <a class="official-link" href="https://chatgpt.com/" target="_blank" rel="noreferrer">
+              Официальный сайт ChatGPT
+            </a>
+            <button class="button primary" type="button" data-provider="chatgpt">
+              Выбрать ChatGPT
+            </button>
+          </article>
+        </div>
+
+        <div class="screen-actions">
+          <button class="button secondary" type="button" data-prev-screen>
+            Назад
+          </button>
+        </div>
+      </section>
+
+      <section id="guide" class="guide-shell screen" data-screen="guide" aria-label="Пошаговая инструкция">
+        <div class="guide-top">
+          <div>
+            <p class="eyebrow">Пошаговый гайд</p>
+            <h2>Делайте по одному шагу</h2>
+          </div>
+          <div class="progress-label" aria-live="polite">
+            <span data-provider-label>Claude</span>: шаг <span data-current-step>1</span> из <span data-total-steps>5</span>
+          </div>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <span data-progress-bar></span>
+        </div>
+
+        <article class="guide-step is-active single-step" data-step="1">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 1</p>
+            <h3>Создайте аккаунт <span data-provider-name>Claude</span></h3>
+            <p>
+              Для тренинга нужен один основной ИИ-сервис. Лучше
+              авторизоваться через <button class="term" type="button" data-term="google-account">Google account</button>: так проще входить на разных
+              устройствах и меньше риск забыть пароль.
+            </p>
+            <ol class="action-list">
+              <li>Откройте официальный сайт: <a data-provider-site href="https://claude.ai/" target="_blank" rel="noreferrer">claude.ai</a>.</li>
+              <li>Нажмите вход или регистрацию.</li>
+              <li>Выберите вход через <button class="term" type="button" data-term="google-account">Google</button>, если такая кнопка доступна.</li>
+              <li>Введите email, к которому у вас есть доступ.</li>
+              <li>Вернитесь на сайт и проверьте, что чат открывается.</li>
+            </ol>
+            <div class="beginner-note">
+              Если вы уже вошли в <span data-provider-name>Claude</span> и видите чат, этот шаг
+              готов.
+            </div>
+          </div>
+        </article>
+
+        <article class="guide-step" data-step="2">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 2</p>
+            <h3>Оформите подписку</h3>
+            <p>
+              <button class="term" type="button" data-term="subscription">Подписка</button> обязательна для нормальной работы на тренинге.
+              <span data-plan-name>Claude Pro</span> стоит около $20 в месяц.
+              Цена может отличаться по региону и налогам.
+            </p>
+            <ol class="action-list">
+              <li>Откройте официальный сайт подписки: <a data-pricing-site href="https://claude.ai/upgrade" target="_blank" rel="noreferrer">claude.ai/upgrade</a>.</li>
+              <li>Выберите тариф <span data-plan-name>Claude Pro</span>.</li>
+              <li>Проверьте, что оплата прошла успешно.</li>
+              <li>Обновите страницу сервиса после оплаты.</li>
+              <li>Убедитесь, что платный план отображается в аккаунте.</li>
+            </ol>
+            <div class="beginner-note">
+              <button class="term" type="button" data-term="claude-code"><span data-code-tool>Claude Code</span></button> - это инструмент <span data-provider-name>Claude</span> для работы с кодом.
+            </div>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Скриншот</span>
+            <h4>Место для скриншота экрана подписки</h4>
+            <p>
+              Здесь нужен экран, где видно тариф Claude Pro или ChatGPT Plus.
+            </p>
+          </aside>
+        </article>
+
+        <article class="guide-step" data-step="3">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 3</p>
+            <h3>Создайте аккаунт GitHub</h3>
+            <p>
+              <button class="term" type="button" data-term="github">GitHub</button> нужен, чтобы хранить код сайта и потом опубликовать его
+              через <button class="term" type="button" data-term="github-pages">GitHub Pages</button>.
+            </p>
+            <ol class="action-list">
+              <li>Откройте официальный сайт: <a href="https://github.com/" target="_blank" rel="noreferrer">github.com</a>.</li>
+              <li>Нажмите регистрацию или вход.</li>
+              <li>Выберите вход через <button class="term" type="button" data-term="google-account">Google</button>, если такая кнопка доступна.</li>
+              <li>Если GitHub попросит пройти <button class="term" type="button" data-term="captcha">капчу</button>, проходите ее внимательно и спокойно: лучше сделать сразу с первого раза, потому что после ошибок проверка может стать сложнее.</li>
+              <li>Подтвердите email через письмо от GitHub.</li>
+            </ol>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Скриншот</span>
+            <h4>Место для скриншота регистрации GitHub</h4>
+            <p>
+              Лучше показать официальный сайт GitHub, кнопку входа через Google и экран проверки, если он появится.
+            </p>
+          </aside>
+        </article>
+
+        <article class="guide-step" data-step="4">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 4</p>
+            <h3>Создайте GitHub token</h3>
+            <p>
+              <button class="term" type="button" data-term="token">Token</button> нужен, чтобы инструмент для кода смог работать с вашим
+              <button class="term" type="button" data-term="github">GitHub</button>: создать <button class="term" type="button" data-term="repository">репозиторий</button>, отправить код и подготовить
+              публикацию.
+            </p>
+            <ol class="action-list">
+              <li>Откройте страницу создания token: <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">github.com/settings/tokens/new</a>.</li>
+              <li>В поле <code>Note</code> / <code>Примечание</code> напишите любое понятное название для token.</li>
+              <li>В поле <code>Expiration</code> / <code>Срок действия</code> выберите <code>No expiration</code>.</li>
+              <li>Ниже поставьте галочку рядом с <code>repo</code> / <code>репозиторий</code>.</li>
+              <li>Пролистайте вниз и нажмите зеленую кнопку <code>Generate token</code> / <code>Сгенерировать токен</code>.</li>
+            </ol>
+            <div class="beginner-note">
+              После того как создали <button class="term" type="button" data-term="token">token</button>, сразу сохраните его в надежном месте.
+              GitHub покажет его только один раз.
+            </div>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Скриншот</span>
+            <h4>Место для скриншотов GitHub token</h4>
+            <p>
+              Нужны экраны: страница создания token, поля Note и Expiration, галочка repo и кнопка Generate token.
+            </p>
+          </aside>
+        </article>
+
+        <article class="guide-step" data-step="5">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 5</p>
+            <h3>Настройте <span data-code-tool>Claude Code</span></h3>
+            <p>
+              Теперь откройте инструмент для работы с кодом. Он понадобится на
+              тренинге, чтобы создавать файлы проекта и отправлять код в GitHub.
+            </p>
+            <ol class="action-list">
+              <li>Откройте <button class="term" type="button" data-term="claude-code"><span data-code-tool>Claude Code</span></button>.</li>
+              <li>Войдите в тот же аккаунт, где оформлена подписка.</li>
+              <li>Откройте или выберите рабочую папку проекта.</li>
+              <li>Проверьте, что инструмент видит файлы и готов принимать задачу.</li>
+              <li>Если появится запрос на доступ к <button class="term" type="button" data-term="github">GitHub</button>, разрешите его.</li>
+            </ol>
+            <div class="beginner-note">
+              Достаточно убедиться, что <span data-code-tool>Claude Code</span>
+              открывается и готов работать с файлами проекта.
+            </div>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Скриншот</span>
+            <h4>Место для скриншота <span data-code-tool>Claude Code</span></h4>
+            <p>
+              Здесь важно показать стартовый экран инструмента для работы с кодом.
+            </p>
+          </aside>
+        </article>
+
+        <div class="guide-controls">
+          <button class="button secondary" type="button" data-prev-step>
+            Назад
+          </button>
+          <button class="button primary" type="button" data-next-step>
+            Следующий шаг
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div class="term-popover" data-term-popover hidden>
+      <button class="term-close" type="button" aria-label="Закрыть подсказку" data-term-close>×</button>
+      <strong data-term-title></strong>
+      <p data-term-body></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
