@@ -3,6 +3,7 @@ const nextScreenButtons = Array.from(document.querySelectorAll("[data-next-scree
 const prevScreenButtons = Array.from(document.querySelectorAll("[data-prev-screen]"));
 const openGuideButtons = Array.from(document.querySelectorAll("[data-open-guide]"));
 const providerButtons = Array.from(document.querySelectorAll("[data-provider]"));
+const platformButtons = Array.from(document.querySelectorAll("[data-platform]"));
 
 const guide = document.querySelector("#guide");
 const steps = Array.from(document.querySelectorAll("[data-step]"));
@@ -19,6 +20,7 @@ const termClose = document.querySelector("[data-term-close]");
 let currentScreen = 0;
 let currentStep = 0;
 let provider = "claude";
+let platform = "windows";
 
 const providerCopy = {
   claude: {
@@ -30,6 +32,10 @@ const providerCopy = {
     siteHref: "https://claude.ai/",
     pricingText: "claude.ai/upgrade",
     pricingHref: "https://claude.ai/upgrade",
+    downloads: {
+      windows: "https://claude.ai/api/desktop/win32/x64/setup/latest/redirect",
+      mac: "https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect",
+    },
   },
   chatgpt: {
     label: "ChatGPT",
@@ -40,7 +46,16 @@ const providerCopy = {
     siteHref: "https://chatgpt.com/",
     pricingText: "openai.com/chatgpt/pricing",
     pricingHref: "https://openai.com/chatgpt/pricing/",
+    downloads: {
+      windows: "https://get.microsoft.com/installer/download/9PLM9XGG6VKS?cid=website_cta_psi",
+      mac: "https://persistent.oaistatic.com/codex-app-prod/Codex.dmg",
+    },
   },
+};
+
+const platformCopy = {
+  windows: { name: "Windows" },
+  mac: { name: "macOS" },
 };
 
 const glossary = {
@@ -79,6 +94,34 @@ const glossary = {
   captcha: {
     title: "Капча",
     body: "Это проверка, что вы настоящий человек. Обычно нужно выбрать картинки, ввести символы или нажать кнопку.",
+  },
+  git: {
+    title: "Git",
+    body: "Это система сохранений для проекта: она запоминает изменения и помогает отправить файлы на GitHub.",
+  },
+  terminal: {
+    title: "Терминал",
+    body: "Это окно, где компьютер выполняет текстовые команды. Представьте строку поиска, которая не ищет, а даёт компьютеру точное поручение.",
+  },
+  command: {
+    title: "Команда",
+    body: "Это одна строка-инструкция для компьютера. Её обычно копируют целиком, вставляют в Терминал и нажимают Enter.",
+  },
+  homebrew: {
+    title: "Homebrew",
+    body: "Это установщик программ для Mac. Он помогает поставить Git одной короткой командой.",
+  },
+  windows: {
+    title: "Windows",
+    body: "Операционная система Microsoft. Обычно на таком компьютере есть меню «Пуск».",
+  },
+  macos: {
+    title: "macOS",
+    body: "Операционная система компьютеров MacBook и iMac от Apple.",
+  },
+  email: {
+    title: "Email",
+    body: "Адрес электронной почты. На него GitHub отправит письмо со ссылкой для подтверждения аккаунта.",
   },
 };
 
@@ -129,6 +172,31 @@ function applyProvider(nextProvider) {
   setText("[data-plan-name]", copy.planName);
   setLink("[data-provider-site]", copy.siteText, copy.siteHref);
   setLink("[data-pricing-site]", copy.pricingText, copy.pricingHref);
+  renderInstallChoice();
+}
+
+function renderInstallChoice() {
+  const platformData = platformCopy[platform];
+  const providerData = providerCopy[provider];
+
+  setText("[data-platform-name]", platformData.name);
+  document.querySelectorAll("[data-platform-panel]").forEach((panel) => {
+    panel.hidden = panel.dataset.platformPanel !== platform;
+  });
+  platformButtons.forEach((button) => {
+    button.classList.toggle("is-selected", button.dataset.platform === platform);
+  });
+
+  document.querySelectorAll("[data-tool-download]").forEach((link) => {
+    link.href = providerData.downloads[platform];
+    link.textContent = `Скачать ${providerData.codeTool} для ${platformData.name}`;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+  });
+  setText(
+    "[data-tool-help]",
+    `Официальный установщик ${providerData.codeTool} для ${platformData.name}.`,
+  );
 }
 
 function hideTermPopover() {
@@ -136,7 +204,8 @@ function hideTermPopover() {
 }
 
 function showTermPopover(button) {
-  const item = glossary[button.dataset.term];
+  const termKey = button.dataset.term === "code-tool" ? (provider === "claude" ? "claude-code" : "codex") : button.dataset.term;
+  const item = glossary[termKey];
   if (!item) return;
 
   termTitle.textContent = item.title;
@@ -186,6 +255,13 @@ providerButtons.forEach((button) => {
   });
 });
 
+platformButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    platform = button.dataset.platform;
+    renderInstallChoice();
+  });
+});
+
 document.addEventListener("click", (event) => {
   const termButton = event.target.closest("[data-term]");
   if (termButton) {
@@ -230,5 +306,6 @@ prevButton.addEventListener("click", () => {
 });
 
 applyProvider(provider);
+renderInstallChoice();
 renderScreen();
 renderStep();

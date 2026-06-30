@@ -306,6 +306,10 @@ h3 {
   list-style: none;
 }
 
+.plan-grid-wide {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .plan-grid li {
   min-height: 174px;
   padding: 22px;
@@ -465,6 +469,36 @@ h3 {
   grid-template-columns: minmax(0, 920px);
 }
 
+.platform-choice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 220px));
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.platform-button {
+  min-height: 58px;
+  padding: 12px 18px;
+  background: #f6faf9;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.platform-button.is-selected {
+  background: var(--dark);
+  border-color: var(--dark);
+  color: white;
+}
+
+[data-platform-panel][hidden] {
+  display: none;
+}
+
 @keyframes stepFade {
   from {
     opacity: 0;
@@ -545,6 +579,33 @@ h3 {
   padding: 18px 20px;
   border-radius: 8px;
   font-size: 17px;
+}
+
+.code-sample code {
+  color: inherit;
+  overflow-wrap: anywhere;
+}
+
+.action-list-continued {
+  margin-top: 18px;
+}
+
+.placeholder-panel {
+  margin-top: 30px;
+  padding: 28px;
+  background: #f6faf9;
+  border: 1px dashed var(--teal);
+  border-radius: 8px;
+}
+
+.placeholder-panel strong {
+  font-size: 22px;
+}
+
+.placeholder-panel p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 18px;
 }
 
 .beginner-note {
@@ -913,6 +974,7 @@ h3 {
 
   .route,
   .plan-grid,
+  .plan-grid-wide,
   .choice-grid,
   .term-grid,
   .publish-grid,
@@ -952,6 +1014,10 @@ h3 {
 
   .guide-controls {
     flex-direction: column-reverse;
+  }
+
+  .platform-choice {
+    grid-template-columns: 1fr;
   }
 
   .step {

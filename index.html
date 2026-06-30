@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="assets/logo2.png" />
     <meta
       name="description"
-      content="Пошаговый гайд для новичков: Claude, подписка, GitHub, GitHub token и настройка Claude Code перед тренингом."
+      content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -27,8 +27,9 @@
           <p class="lead">
             Пройдите подготовительные шаги: аккаунт Claude или ChatGPT,
             <button class="term" type="button" data-term="subscription">подписка</button>,
+            установка <button class="term" type="button" data-term="git">Git</button>,
             <button class="term" type="button" data-term="github">GitHub</button>,
-            <button class="term" type="button" data-term="token">GitHub token</button> и настройка
+            <button class="term" type="button" data-term="token">GitHub token</button> и
             <button class="term" type="button" data-term="claude-code">Claude Code</button> или
             <button class="term" type="button" data-term="codex">Codex</button>.
             После этого можно
@@ -57,7 +58,7 @@
           </p>
         </div>
 
-        <ol class="plan-grid">
+        <ol class="plan-grid plan-grid-wide">
           <li>
             <span>1</span>
             <strong>Claude или ChatGPT</strong>
@@ -70,18 +71,28 @@
           </li>
           <li>
             <span>3</span>
+            <strong>Установка <button class="term inline-term" type="button" data-term="git">Git</button></strong>
+            <p>Отдельная инструкция для Windows и macOS.</p>
+          </li>
+          <li>
+            <span>4</span>
+            <strong><button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button></strong>
+            <p>Скачать и установить приложение.</p>
+          </li>
+          <li>
+            <span>5</span>
             <strong>Аккаунт <button class="term inline-term" type="button" data-term="github">GitHub</button></strong>
             <p>Создать аккаунт и подтвердить почту.</p>
           </li>
           <li>
-            <span>4</span>
+            <span>6</span>
             <strong><button class="term inline-term" type="button" data-term="token">GitHub token</button></strong>
-            <p>Сгенерировать token и сохранить его безопасно.</p>
+            <p>Создать и сохранить ключ доступа.</p>
           </li>
           <li>
-            <span>5</span>
-            <strong><button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button></strong>
-            <p>Подключить инструмент для работы с кодом.</p>
+            <span>7</span>
+            <strong>Передача token</strong>
+            <p>Подключить GitHub к выбранному приложению.</p>
           </li>
         </ol>
 
@@ -151,7 +162,7 @@
             <h2>Делайте по одному шагу</h2>
           </div>
           <div class="progress-label" aria-live="polite">
-            <span data-provider-label>Claude</span>: шаг <span data-current-step>1</span> из <span data-total-steps>5</span>
+            <span data-provider-label>Claude</span>: шаг <span data-current-step>1</span> из <span data-total-steps>8</span>
           </div>
         </div>
 
@@ -199,7 +210,7 @@
               <li>Убедитесь, что платный план отображается в аккаунте.</li>
             </ol>
             <div class="beginner-note">
-              <button class="term" type="button" data-term="claude-code"><span data-code-tool>Claude Code</span></button> - это инструмент <span data-provider-name>Claude</span> для работы с кодом.
+              <button class="term" type="button" data-term="code-tool"><span data-code-tool>Claude Code</span></button> - это инструмент <span data-provider-name>Claude</span> для работы с кодом.
             </div>
           </div>
           <aside class="screen-card">
@@ -211,75 +222,76 @@
           </aside>
         </article>
 
-        <article class="guide-step" data-step="3">
+        <article class="guide-step single-step" data-step="3">
           <div class="step-copy">
             <p class="eyebrow">Шаг 3</p>
-            <h3>Создайте аккаунт GitHub</h3>
+            <h3>Выберите операционную систему</h3>
             <p>
-              <button class="term" type="button" data-term="github">GitHub</button> нужен, чтобы хранить код сайта и потом опубликовать его
-              через <button class="term" type="button" data-term="github-pages">GitHub Pages</button>.
+              Дальше инструкция будет отличаться для
+              <button class="term" type="button" data-term="windows">Windows</button> и
+              <button class="term" type="button" data-term="macos">macOS</button>.
             </p>
-            <ol class="action-list">
-              <li>Откройте официальный сайт: <a href="https://github.com/" target="_blank" rel="noreferrer">github.com</a>.</li>
-              <li>Нажмите регистрацию или вход.</li>
-              <li>Выберите вход через <button class="term" type="button" data-term="google-account">Google</button>, если такая кнопка доступна.</li>
-              <li>Если GitHub попросит пройти <button class="term" type="button" data-term="captcha">капчу</button>, проходите ее внимательно и спокойно: лучше сделать сразу с первого раза, потому что после ошибок проверка может стать сложнее.</li>
-              <li>Подтвердите email через письмо от GitHub.</li>
-            </ol>
+            <div class="platform-choice" role="group" aria-label="Операционная система">
+              <button class="platform-button is-selected" type="button" data-platform="windows">Windows</button>
+              <button class="platform-button" type="button" data-platform="mac">macOS</button>
+            </div>
+            <div class="beginner-note">
+              Выбрано: <strong data-platform-name>Windows</strong>. Выбор сохранится для следующих шагов.
+            </div>
           </div>
-          <aside class="screen-card">
-            <span class="screen-label">Скриншот</span>
-            <h4>Место для скриншота регистрации GitHub</h4>
-            <p>
-              Лучше показать официальный сайт GitHub, кнопку входа через Google и экран проверки, если он появится.
-            </p>
-          </aside>
         </article>
 
         <article class="guide-step" data-step="4">
           <div class="step-copy">
             <p class="eyebrow">Шаг 4</p>
-            <h3>Создайте GitHub token</h3>
+            <h3>Установите <button class="term" type="button" data-term="git">Git</button></h3>
             <p>
-              <button class="term" type="button" data-term="token">Token</button> нужен, чтобы инструмент для кода смог работать с вашим
-              <button class="term" type="button" data-term="github">GitHub</button>: создать <button class="term" type="button" data-term="repository">репозиторий</button>, отправить код и подготовить
-              публикацию.
+              <button class="term" type="button" data-term="git">Git</button> помогает приложению сохранять изменения и отправлять проект в GitHub.
             </p>
-            <ol class="action-list">
-              <li>Откройте страницу создания token: <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">github.com/settings/tokens/new</a>.</li>
-              <li>В поле <code>Note</code> / <code>Примечание</code> напишите любое понятное название для token.</li>
-              <li>В поле <code>Expiration</code> / <code>Срок действия</code> выберите <code>No expiration</code>.</li>
-              <li>Ниже поставьте галочку рядом с <code>repo</code> / <code>репозиторий</code>.</li>
-              <li>Пролистайте вниз и нажмите зеленую кнопку <code>Generate token</code> / <code>Сгенерировать токен</code>.</li>
-            </ol>
+            <div data-platform-panel="windows">
+              <ol class="action-list">
+                <li>Скачайте установщик: <a href="https://github.com/git-for-windows/git/releases/download/v2.55.0.windows.1/Git-2.55.0-64-bit.exe">Git для Windows</a>.</li>
+                <li>Откройте скачанный файл <code>Git-2.55.0-64-bit.exe</code>.</li>
+                <li>Во всех окнах оставляйте настройки по умолчанию и нажимайте <code>Next</code> / <code>Далее</code>.</li>
+                <li>В конце нажмите <code>Install</code>, затем <code>Finish</code>.</li>
+              </ol>
+            </div>
+            <div data-platform-panel="mac" hidden>
+              <ol class="action-list">
+                <li>Откройте <button class="term" type="button" data-term="terminal">Терминал</button>: нажмите <code>Cmd + Space</code>, напишите <code>Terminal</code> и нажмите Enter.</li>
+                <li>Вставьте <button class="term" type="button" data-term="command">команду</button> установки <button class="term" type="button" data-term="homebrew">Homebrew</button>:</li>
+              </ol>
+              <div class="code-sample"><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></div>
+              <ol class="action-list action-list-continued">
+                <li>Дождитесь завершения установки. Если система попросит пароль от Mac, вводите его вслепую и нажмите Enter.</li>
+                <li>Затем вставьте вторую команду:</li>
+              </ol>
+              <div class="code-sample"><code>brew install git</code></div>
+            </div>
             <div class="beginner-note">
-              После того как создали <button class="term" type="button" data-term="token">token</button>, сразу сохраните его в надежном месте.
-              GitHub покажет его только один раз.
+              После установки перезапустите приложение, если оно было открыто.
             </div>
           </div>
           <aside class="screen-card">
-            <span class="screen-label">Скриншот</span>
-            <h4>Место для скриншотов GitHub token</h4>
-            <p>
-              Нужны экраны: страница создания token, поля Note и Expiration, галочка repo и кнопка Generate token.
-            </p>
+            <span class="screen-label">Почему это нужно</span>
+            <h4><button class="term" type="button" data-term="git">Git</button> — история проекта</h4>
+            <p>Это как сохранения в игре: можно фиксировать версии проекта и отправлять их в облачное хранилище.</p>
           </aside>
         </article>
 
         <article class="guide-step" data-step="5">
           <div class="step-copy">
             <p class="eyebrow">Шаг 5</p>
-            <h3>Настройте <span data-code-tool>Claude Code</span></h3>
+            <h3>Установите <span data-code-tool>Claude Code</span></h3>
             <p>
-              Теперь откройте инструмент для работы с кодом. Он понадобится на
-              тренинге, чтобы создавать файлы проекта и отправлять код в GitHub.
+              Скачайте приложение для выбранной системы: <strong data-platform-name>Windows</strong>.
             </p>
             <ol class="action-list">
-              <li>Откройте <button class="term" type="button" data-term="claude-code"><span data-code-tool>Claude Code</span></button>.</li>
+              <li>Откройте официальную ссылку: <a data-tool-download href="#">Скачать приложение</a>.</li>
+              <li>Откройте скачанный установщик и завершите установку.</li>
+              <li>Запустите <button class="term" type="button" data-term="code-tool"><span data-code-tool>Claude Code</span></button>.</li>
               <li>Войдите в тот же аккаунт, где оформлена подписка.</li>
-              <li>Откройте или выберите рабочую папку проекта.</li>
-              <li>Проверьте, что инструмент видит файлы и готов принимать задачу.</li>
-              <li>Если появится запрос на доступ к <button class="term" type="button" data-term="github">GitHub</button>, разрешите его.</li>
+              <li>Убедитесь, что приложение открылось без ошибок.</li>
             </ol>
             <div class="beginner-note">
               Достаточно убедиться, что <span data-code-tool>Claude Code</span>
@@ -287,12 +299,64 @@
             </div>
           </div>
           <aside class="screen-card">
-            <span class="screen-label">Скриншот</span>
-            <h4>Место для скриншота <span data-code-tool>Claude Code</span></h4>
-            <p>
-              Здесь важно показать стартовый экран инструмента для работы с кодом.
-            </p>
+            <span class="screen-label">Приложение</span>
+            <h4><span data-code-tool>Claude Code</span></h4>
+            <p data-tool-help>Версия для Windows будет скачана по официальной ссылке.</p>
           </aside>
+        </article>
+
+        <article class="guide-step" data-step="6">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 6</p>
+            <h3>Создайте аккаунт GitHub</h3>
+            <p><button class="term" type="button" data-term="github">GitHub</button> нужен, чтобы хранить код и публиковать сайт через <button class="term" type="button" data-term="github-pages">GitHub Pages</button>.</p>
+            <ol class="action-list">
+              <li>Откройте официальный сайт: <a href="https://github.com/" target="_blank" rel="noreferrer">github.com</a>.</li>
+              <li>Нажмите регистрацию или вход.</li>
+              <li>Выберите вход через <button class="term" type="button" data-term="google-account">Google</button>, если такая кнопка доступна.</li>
+              <li>Если появится <button class="term" type="button" data-term="captcha">капча</button>, проходите её внимательно с первого раза.</li>
+              <li>Подтвердите <button class="term" type="button" data-term="email">email</button> через письмо от GitHub.</li>
+            </ol>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Готово, если</span>
+            <h4>GitHub открывает ваш профиль</h4>
+            <p>На этом шаге создавать репозиторий пока не нужно.</p>
+          </aside>
+        </article>
+
+        <article class="guide-step" data-step="7">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 7</p>
+            <h3>Создайте GitHub token</h3>
+            <p><button class="term" type="button" data-term="token">Token</button> позволит приложению создать <button class="term" type="button" data-term="repository">репозиторий</button> и отправить туда файлы.</p>
+            <ol class="action-list">
+              <li>Откройте страницу: <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">github.com/settings/tokens/new</a>.</li>
+              <li>В <code>Note</code> напишите любое понятное название.</li>
+              <li>В <code>Expiration</code> выберите <code>No expiration</code>.</li>
+              <li>Поставьте галочку рядом с <code>repo</code>.</li>
+              <li>Внизу нажмите зелёную кнопку <code>Generate token</code>.</li>
+              <li>Сразу скопируйте token и сохраните его: GitHub покажет его только один раз.</li>
+            </ol>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Важно</span>
+            <h4>Не показывайте token другим</h4>
+            <p>Это отдельный ключ от GitHub. Храните его как пароль.</p>
+          </aside>
+        </article>
+
+        <article class="guide-step single-step" data-step="8">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 8</p>
+            <h3>Передайте token в <span data-code-tool>Claude Code</span></h3>
+            <p>На следующем этапе мы подробно распишем, куда вставить token и как проверить подключение к GitHub.</p>
+            <div class="placeholder-panel">
+              <strong>Страница подготовлена</strong>
+              <p>Подробная пошаговая инструкция будет добавлена позже.</p>
+            </div>
+            <div class="beginner-note">Пока просто убедитесь, что token сохранён и приложение <span data-code-tool>Claude Code</span> установлено.</div>
+          </div>
         </article>
 
         <div class="guide-controls">
