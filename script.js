@@ -172,6 +172,9 @@ function applyProvider(nextProvider) {
   setText("[data-plan-name]", copy.planName);
   setLink("[data-provider-site]", copy.siteText, copy.siteHref);
   setLink("[data-pricing-site]", copy.pricingText, copy.pricingHref);
+  document.querySelectorAll("[data-provider-panel]").forEach((panel) => {
+    panel.hidden = panel.dataset.providerPanel !== provider;
+  });
   renderInstallChoice();
 }
 

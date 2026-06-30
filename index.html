@@ -10,7 +10,7 @@
       name="description"
       content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
-    <link rel="stylesheet" href="styles.css?v=20260701-2" />
+    <link rel="stylesheet" href="styles.css?v=20260701-3" />
   </head>
   <body>
     <header class="site-header">
@@ -213,12 +213,20 @@
               <button class="term" type="button" data-term="code-tool"><span data-code-tool>Claude Code</span></button> - это инструмент <span data-provider-name>Claude</span> для работы с кодом.
             </div>
           </div>
-          <aside class="screen-card">
-            <span class="screen-label">Скриншот</span>
-            <h4>Место для скриншота экрана подписки</h4>
-            <p>
-              Здесь нужен экран, где видно тариф Claude Pro или ChatGPT Plus.
-            </p>
+          <aside class="screen-card subscription-card">
+            <div data-provider-panel="claude">
+              <span class="screen-label">Claude Pro</span>
+              <h4>Выберите Monthly и Get Pro plan</h4>
+              <a class="screenshot-link" href="assets/claude-pro-subscription.png" target="_blank" rel="noreferrer" aria-label="Открыть скриншот подписки Claude Pro крупнее">
+                <img class="instruction-shot" src="assets/claude-pro-subscription.png" alt="Тариф Claude Pro за 20 долларов в месяц, переключатель Monthly и кнопка Get Pro plan" />
+              </a>
+              <p>Нажмите на изображение, чтобы открыть его крупнее.</p>
+            </div>
+            <div data-provider-panel="chatgpt" hidden>
+              <span class="screen-label">ChatGPT Plus</span>
+              <h4>Скриншот добавим позже</h4>
+              <p>Пока ориентируйтесь на ссылку и название тарифа слева.</p>
+            </div>
           </aside>
         </article>
 
@@ -379,6 +387,6 @@
       <p data-term-body></p>
     </div>
 
-    <script src="script.js?v=20260701-2"></script>
+    <script src="script.js?v=20260701-3"></script>
   </body>
 </html>
