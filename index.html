@@ -10,7 +10,7 @@
       name="description"
       content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
-    <link rel="stylesheet" href="styles.css?v=20260701-1" />
+    <link rel="stylesheet" href="styles.css?v=20260701-2" />
   </head>
   <body>
     <header class="site-header">
@@ -334,15 +334,18 @@
               <li>Откройте страницу: <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">github.com/settings/tokens/new</a>.</li>
               <li>В <code>Note</code> напишите любое понятное название.</li>
               <li>В <code>Expiration</code> выберите <code>No expiration</code>.</li>
-              <li>Поставьте галочку рядом с <code>repo</code>.</li>
+              <li>Поставьте галочку рядом с <code>repo</code> и <code>workflow</code>.</li>
               <li>Внизу нажмите зелёную кнопку <code>Generate token</code>.</li>
               <li>Сразу скопируйте token и сохраните его: GitHub покажет его только один раз.</li>
             </ol>
           </div>
           <aside class="screen-card">
-            <span class="screen-label">Важно</span>
-            <h4>Не показывайте token другим</h4>
-            <p>Это отдельный ключ от GitHub. Храните его как пароль.</p>
+            <span class="screen-label">Пример</span>
+            <h4>Настройки token</h4>
+            <a class="screenshot-link" href="assets/github-token-guide.png" target="_blank" rel="noreferrer" aria-label="Открыть скриншот настроек GitHub token крупнее">
+              <img class="instruction-shot" src="assets/github-token-guide.png" alt="Поля создания GitHub token, галочки repo и workflow, кнопка Generate token и копирование token" />
+            </a>
+            <p>Нажмите на изображение, чтобы открыть его крупнее.</p>
           </aside>
         </article>
 
@@ -376,6 +379,6 @@
       <p data-term-body></p>
     </div>
 
-    <script src="script.js?v=20260701-1"></script>
+    <script src="script.js?v=20260701-2"></script>
   </body>
 </html>

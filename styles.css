@@ -663,6 +663,23 @@ h3 {
   font-size: 18px;
 }
 
+.screenshot-link {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0d1117;
+}
+
+.instruction-shot {
+  display: block;
+  width: 100%;
+  max-height: 560px;
+  object-fit: contain;
+}
+
 .guide-controls {
   display: flex;
   justify-content: space-between;
