@@ -10,7 +10,7 @@
       name="description"
       content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
-    <link rel="stylesheet" href="styles.css?v=20260701-4" />
+    <link rel="stylesheet" href="styles.css?v=20260701-5" />
   </head>
   <body>
     <header class="site-header">
@@ -363,13 +363,36 @@
         <article class="guide-step single-step" data-step="8">
           <div class="step-copy">
             <p class="eyebrow">Шаг 8</p>
-            <h3>Передайте token в <span data-code-tool>Claude Code</span></h3>
-            <p>На следующем этапе мы подробно распишем, куда вставить token и как проверить подключение к GitHub.</p>
-            <div class="placeholder-panel">
-              <strong>Страница подготовлена</strong>
-              <p>Подробная пошаговая инструкция будет добавлена позже.</p>
+            <h3>Создайте папку и откройте её в <span data-code-tool>Claude Code</span></h3>
+            <p>Эта <button class="term" type="button" data-term="project-folder">папка проекта</button> станет рабочим местом приложения: здесь появятся файлы будущего сайта.</p>
+            <ol class="action-list">
+              <li>Создайте новую папку в любом удобном месте: например, на рабочем столе или в документах.</li>
+              <li>Назовите её как хотите. Например: <code>Первый проект Вайбкодинг</code>.</li>
+              <li>Откройте приложение <button class="term" type="button" data-term="code-tool"><span data-code-tool>Claude Code</span></button>.</li>
+              <li>Выберите созданную папку внутри приложения.</li>
+              <li>Убедитесь, что название папки появилось рядом с полем для задания.</li>
+            </ol>
+
+            <div data-provider-panel="claude">
+              <p class="provider-hint">В верхней части приложения можно переключаться между режимами <strong>Chat</strong> и <strong>Claude Code</strong>.</p>
+              <div class="mode-explainer">
+                <p><strong><button class="term" type="button" data-term="chat-mode">Chat</button></strong> — обычный разговор с Claude: обсудить идею, задать вопрос или подготовить план.</p>
+                <p><strong><button class="term" type="button" data-term="claude-code">Claude Code</button></strong> — режим работы с файлами: создаёт и меняет код внутри выбранной папки.</p>
+              </div>
+              <a class="screenshot-link" href="assets/claude-code-select-folder.png" target="_blank" rel="noreferrer" aria-label="Открыть скриншот выбора папки в Claude Code крупнее">
+                <img class="instruction-shot wide-shot" src="assets/claude-code-select-folder.png" alt="Кнопка выбора папки проекта в Claude Code" />
+              </a>
+              <p class="image-caption">Нажмите на название папки или значок папки, затем выберите созданную папку проекта.</p>
             </div>
-            <div class="beginner-note">Пока просто убедитесь, что token сохранён и приложение <span data-code-tool>Claude Code</span> установлено.</div>
+
+            <div data-provider-panel="chatgpt" hidden>
+              <div class="placeholder-panel">
+                <strong>Скриншот Codex добавим позже</strong>
+                <p>Пока откройте Codex, оставьте режим <button class="term" type="button" data-term="local-mode">Local</button> и выберите созданную папку проекта.</p>
+              </div>
+            </div>
+
+            <div class="beginner-note">Готово, если приложение показывает название вашей папки. Инструкцию по передаче token добавим следующим этапом.</div>
           </div>
         </article>
 
@@ -390,6 +413,6 @@
       <p data-term-body></p>
     </div>
 
-    <script src="script.js?v=20260701-4"></script>
+    <script src="script.js?v=20260701-5"></script>
   </body>
 </html>
