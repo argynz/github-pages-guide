@@ -31,11 +31,44 @@ body {
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   line-height: 1.5;
+  padding-top: 60px;
 }
 
 main {
-  height: 100dvh;
+  height: calc(100dvh - 60px);
   overflow: hidden;
+}
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(20px, 5vw, 72px);
+  z-index: 100;
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.site-logo {
+  height: 36px;
+  width: auto;
+}
+
+.site-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 a {
@@ -53,14 +86,13 @@ pre {
   grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
   gap: clamp(28px, 5vw, 72px);
   align-items: center;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 60px);
   padding: clamp(48px, 8vw, 90px) clamp(20px, 5vw, 72px) 56px;
-  border-top: 18px solid var(--teal);
 }
 
 .screen {
   display: none;
-  height: 100dvh;
+  height: calc(100dvh - 60px);
   overflow-y: auto;
   overscroll-behavior: contain;
 }
