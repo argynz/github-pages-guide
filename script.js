@@ -4,6 +4,8 @@ const prevScreenButtons = Array.from(document.querySelectorAll("[data-prev-scree
 const openGuideButtons = Array.from(document.querySelectorAll("[data-open-guide]"));
 const providerButtons = Array.from(document.querySelectorAll("[data-provider]"));
 const platformButtons = Array.from(document.querySelectorAll("[data-platform]"));
+const navButtons = Array.from(document.querySelectorAll("[data-nav]"));
+const stepJump = document.querySelector("[data-step-jump]");
 
 const guide = document.querySelector("#guide");
 const steps = Array.from(document.querySelectorAll("[data-step]"));
@@ -137,6 +139,17 @@ const glossary = {
   },
 };
 
+const stepNames = ["Аккаунт", "Подписка", "Система", "Git", "Приложение", "GitHub", "Токен", "Папка"];
+
+const quizQuestions = [
+  { question: "Для чего нужен Git?", answers: ["Для сохранения истории изменений проекта", "Для оплаты подписки", "Для видеозвонков"], correct: 0 },
+  { question: "Что такое GitHub token?", answers: ["Название проекта", "Ключ доступа к GitHub", "Пароль от компьютера"], correct: 1 },
+  { question: "Можно ли показывать свой token другим?", answers: ["Да, всем", "Только в соцсетях", "Нет, его нужно хранить в секрете"], correct: 2 },
+  { question: "Что хранится в репозитории?", answers: ["Файлы одного проекта", "Только фотографии профиля", "Банковские данные"], correct: 0 },
+  { question: "Что нужно сделать сразу после создания token?", answers: ["Удалить его", "Скопировать и сохранить", "Перезагрузить компьютер"], correct: 1 },
+  { question: "Для чего нужна папка проекта?", answers: ["Для файлов будущего сайта", "Для установки Windows", "Для писем GitHub"], correct: 0 },
+];
+
 function renderScreen() {
   screens.forEach((screen, index) => {
     screen.classList.toggle("is-screen-active", index === currentScreen);
@@ -146,6 +159,10 @@ function renderScreen() {
 function goToScreen(index) {
   currentScreen = Math.max(0, Math.min(index, screens.length - 1));
   renderScreen();
+  navButtons.forEach((button) => {
+    const activeScreen = screens[currentScreen]?.dataset.screen;
+    button.classList.toggle("is-active", button.dataset.nav === activeScreen || (button.dataset.nav === "guide" && ["home", "plan", "choice"].includes(activeScreen)));
+  });
 }
 
 function renderStep() {
@@ -156,6 +173,11 @@ function renderStep() {
   currentStepLabel.textContent = String(currentStep + 1);
   totalStepsLabel.textContent = String(steps.length);
   progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+
+  stepJump.querySelectorAll("button").forEach((button, index) => {
+    button.classList.toggle("is-active", index === currentStep);
+    button.setAttribute("aria-current", index === currentStep ? "step" : "false");
+  });
 
   prevButton.disabled = false;
   nextButton.textContent =
@@ -274,8 +296,68 @@ platformButtons.forEach((button) => {
   button.addEventListener("click", () => {
     platform = button.dataset.platform;
     renderInstallChoice();
+    currentStep = Math.min(currentStep + 1, steps.length - 1);
+    renderStep();
+    guide.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
+
+navButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const target = button.dataset.nav;
+    if (target === "guide") {
+      openGuide();
+      return;
+    }
+    goToScreen(screens.findIndex((screen) => screen.dataset.screen === target));
+  });
+});
+
+stepNames.forEach((name, index) => {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.innerHTML = `<span>${index + 1}</span>${name}`;
+  button.addEventListener("click", () => {
+    currentStep = index;
+    renderStep();
+    guide.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  stepJump.append(button);
+});
+
+const glossaryList = document.querySelector("[data-glossary-list]");
+const glossarySearch = document.querySelector("[data-glossary-search]");
+const glossaryEmpty = document.querySelector("[data-glossary-empty]");
+
+function renderGlossary(query = "") {
+  const normalized = query.trim().toLowerCase();
+  const entries = Object.values(glossary).filter((item) => `${item.title} ${item.body}`.toLowerCase().includes(normalized));
+  glossaryList.innerHTML = entries.map((item) => `<article class="glossary-card"><h3>${item.title}</h3><p>${item.body}</p></article>`).join("");
+  glossaryEmpty.hidden = entries.length > 0;
+}
+
+glossarySearch.addEventListener("input", () => renderGlossary(glossarySearch.value));
+renderGlossary();
+
+const quizList = document.querySelector("[data-quiz-list]");
+const quizForm = document.querySelector("[data-quiz-form]");
+const quizResult = document.querySelector("[data-quiz-result]");
+
+quizList.innerHTML = quizQuestions.map((item, questionIndex) => `
+  <fieldset class="quiz-question">
+    <legend><span>${questionIndex + 1}</span>${item.question}</legend>
+    ${item.answers.map((answer, answerIndex) => `<label><input type="radio" name="question-${questionIndex}" value="${answerIndex}" required><span>${answer}</span></label>`).join("")}
+  </fieldset>`).join("");
+
+quizForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(quizForm);
+  const score = quizQuestions.reduce((total, item, index) => total + (Number(data.get(`question-${index}`)) === item.correct ? 1 : 0), 0);
+  quizResult.hidden = false;
+  quizResult.innerHTML = `<strong>${score} из ${quizQuestions.length}</strong><p>${score === quizQuestions.length ? "Отлично! Всё готово к практике." : score >= 4 ? "Хороший результат. Ошибки можно быстро проверить в глоссарии." : "Стоит ещё раз пройти гайд — после этого тест станет лёгким."}</p>`;
+});
+
+quizForm.addEventListener("reset", () => { quizResult.hidden = true; });
 
 document.addEventListener("click", (event) => {
   const termButton = event.target.closest("[data-term]");

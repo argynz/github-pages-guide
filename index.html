@@ -10,7 +10,7 @@
       name="description"
       content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
-    <link rel="stylesheet" href="styles.css?v=20260701-5" />
+    <link rel="stylesheet" href="styles.css?v=20260702-1" />
   </head>
   <body>
     <header class="site-header">
@@ -18,6 +18,11 @@
         <img src="assets/logo2.png" alt="Вайбкодинг логотип" class="site-logo" />
         <span class="site-name">Вайбкодинг гайд</span>
       </a>
+      <nav class="site-nav" aria-label="Основная навигация">
+        <button type="button" data-nav="guide">Гайд</button>
+        <button type="button" data-nav="glossary">Глоссарий</button>
+        <button type="button" data-nav="quiz">Тест</button>
+      </nav>
     </header>
     <main id="top">
       <section class="hero setup-hero screen is-screen-active" data-screen="home">
@@ -169,6 +174,8 @@
         <div class="progress-track" aria-hidden="true">
           <span data-progress-bar></span>
         </div>
+
+        <nav class="step-jump" aria-label="Быстрый переход по шагам" data-step-jump></nav>
 
         <article class="guide-step is-active single-step" data-step="1">
           <div class="step-copy">
@@ -343,10 +350,10 @@
             <p><button class="term" type="button" data-term="token">Token</button> позволит приложению создать <button class="term" type="button" data-term="repository">репозиторий</button> и отправить туда файлы.</p>
             <ol class="action-list">
               <li>Откройте страницу: <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">github.com/settings/tokens/new</a>.</li>
-              <li>В <code>Note</code> напишите любое понятное название.</li>
-              <li>В <code>Expiration</code> выберите <code>No expiration</code>.</li>
-              <li>Поставьте галочку рядом с <code>repo</code> и <code>workflow</code>.</li>
-              <li>Внизу нажмите зелёную кнопку <code>Generate token</code>.</li>
+              <li>В <code>Note / Примечание</code> напишите любое понятное название.</li>
+              <li>В <code>Expiration / Срок действия</code> выберите <code>No expiration / Без срока действия</code>.</li>
+              <li>Поставьте галочку рядом с <code>repo / репозиторий</code> и <code>workflow / рабочий процесс</code>.</li>
+              <li>Внизу нажмите зелёную кнопку <code>Generate token / Создать токен</code>.</li>
               <li>Сразу скопируйте token и сохраните его: GitHub покажет его только один раз.</li>
             </ol>
           </div>
@@ -405,6 +412,36 @@
           </button>
         </div>
       </section>
+
+      <section class="info-page screen" data-screen="glossary" aria-label="Глоссарий">
+        <div class="section-heading">
+          <p class="eyebrow">Словарь новичка</p>
+          <h2>Глоссарий</h2>
+          <p>Все подчёркнутые слова из гайда — простыми словами и без технического тумана.</p>
+        </div>
+        <label class="glossary-search">
+          <span>Найти термин</span>
+          <input type="search" placeholder="Например: GitHub или токен" data-glossary-search />
+        </label>
+        <div class="glossary-grid" data-glossary-list></div>
+        <p class="empty-message" data-glossary-empty hidden>Такого термина пока нет.</p>
+      </section>
+
+      <section class="info-page screen" data-screen="quiz" aria-label="Тест для закрепления">
+        <div class="section-heading">
+          <p class="eyebrow">Закрепление</p>
+          <h2>Небольшой тест</h2>
+          <p>Шесть вопросов без подвохов. Можно проходить сколько угодно раз.</p>
+        </div>
+        <form class="quiz-card" data-quiz-form>
+          <div data-quiz-list></div>
+          <div class="quiz-actions">
+            <button class="button primary" type="submit">Проверить ответы</button>
+            <button class="button secondary" type="reset">Пройти заново</button>
+          </div>
+          <div class="quiz-result" data-quiz-result aria-live="polite" hidden></div>
+        </form>
+      </section>
     </main>
 
     <div class="term-popover" data-term-popover hidden>
@@ -413,6 +450,6 @@
       <p data-term-body></p>
     </div>
 
-    <script src="script.js?v=20260701-5"></script>
+    <script src="script.js?v=20260702-1"></script>
   </body>
 </html>
