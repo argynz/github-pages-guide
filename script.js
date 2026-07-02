@@ -22,7 +22,7 @@ const termClose = document.querySelector("[data-term-close]");
 
 let currentScreen = 0;
 let currentStep = 0;
-let provider = "claude";
+let provider = "chatgpt";
 let platform = "windows";
 
 const providerCopy = {
@@ -140,7 +140,18 @@ const glossary = {
   },
 };
 
-const stepNames = ["Аккаунт", "Подписка", "Система", "Git", "Приложение", "GitHub", "Токен", "Папка"];
+const routeSteps = [
+  { number: 0, name: "Общий план", screen: "plan" },
+  { number: 1, name: "Инструмент", screen: "choice" },
+  { number: 2, name: "Аккаунт", guideIndex: 0 },
+  { number: 3, name: "Подписка", guideIndex: 1 },
+  { number: 4, name: "Система", guideIndex: 2 },
+  { number: 5, name: "Git", guideIndex: 3 },
+  { number: 6, name: "Приложение", guideIndex: 4 },
+  { number: 7, name: "GitHub", guideIndex: 5 },
+  { number: 8, name: "Токен", guideIndex: 6 },
+  { number: 9, name: "Папка", guideIndex: 7 },
+];
 
 const quizQuestions = [
   { question: "Для чего нужен Git?", answers: ["Для сохранения истории изменений проекта", "Для оплаты подписки", "Для создания паролей"], correct: 0 },
@@ -183,6 +194,7 @@ function goToScreen(index) {
     const activeScreen = screens[currentScreen]?.dataset.screen;
     button.classList.toggle("is-active", button.dataset.nav === activeScreen || (button.dataset.nav === "guide" && ["home", "plan", "choice"].includes(activeScreen)));
   });
+  renderStep();
 }
 
 function renderStep() {
@@ -190,14 +202,18 @@ function renderStep() {
     step.classList.toggle("is-active", index === currentStep);
   });
 
-  currentStepLabel.textContent = String(currentStep + 1);
-  totalStepsLabel.textContent = String(steps.length);
-  progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+  currentStepLabel.textContent = String(currentStep + 2);
+  totalStepsLabel.textContent = String(steps.length + 1);
+  progressBar.style.width = `${((currentStep + 2) / (steps.length + 1)) * 100}%`;
 
-  stepJumps.forEach((jump) => jump.querySelectorAll("button").forEach((button, index) => {
-    const guideIsOpen = screens[currentScreen]?.dataset.screen === "guide";
-    button.classList.toggle("is-active", guideIsOpen && index === currentStep);
-    button.setAttribute("aria-current", guideIsOpen && index === currentStep ? "step" : "false");
+  stepJumps.forEach((jump) => jump.querySelectorAll("button").forEach((button) => {
+    const activeScreen = screens[currentScreen]?.dataset.screen;
+    const target = Number(button.dataset.stepTarget);
+    const isActive = (activeScreen === "plan" && target === 0) ||
+      (activeScreen === "choice" && target === 1) ||
+      (activeScreen === "guide" && target === currentStep + 2);
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-current", isActive ? "step" : "false");
   }));
 
   prevButton.disabled = false;
@@ -335,13 +351,18 @@ navButtons.forEach((button) => {
 });
 
 stepJumps.forEach((jump) => {
-  stepNames.forEach((name, index) => {
+  routeSteps.forEach((routeStep) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.dataset.stepTarget = String(index + 1);
-    button.innerHTML = `<span>${index + 1}</span>${name}`;
+    button.dataset.stepTarget = String(routeStep.number);
+    button.innerHTML = `<span>${routeStep.number}</span>${routeStep.name}`;
     button.addEventListener("click", () => {
-      currentStep = index;
+      if (routeStep.screen) {
+        goToScreen(screens.findIndex((screen) => screen.dataset.screen === routeStep.screen));
+        renderStep();
+        return;
+      }
+      currentStep = routeStep.guideIndex;
       goToScreen(screens.findIndex((screen) => screen.dataset.screen === "guide"));
       renderStep();
       guide.scrollTo({ top: 0, behavior: "smooth" });
