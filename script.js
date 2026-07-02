@@ -5,7 +5,8 @@ const openGuideButtons = Array.from(document.querySelectorAll("[data-open-guide]
 const providerButtons = Array.from(document.querySelectorAll("[data-provider]"));
 const platformButtons = Array.from(document.querySelectorAll("[data-platform]"));
 const navButtons = Array.from(document.querySelectorAll("[data-nav]"));
-const stepJump = document.querySelector("[data-step-jump]");
+const stepJumps = Array.from(document.querySelectorAll("[data-step-jump]"));
+const homeLink = document.querySelector("[data-home-link]");
 
 const guide = document.querySelector("#guide");
 const steps = Array.from(document.querySelectorAll("[data-step]"));
@@ -193,10 +194,11 @@ function renderStep() {
   totalStepsLabel.textContent = String(steps.length);
   progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
 
-  stepJump.querySelectorAll("button").forEach((button, index) => {
-    button.classList.toggle("is-active", index === currentStep);
-    button.setAttribute("aria-current", index === currentStep ? "step" : "false");
-  });
+  stepJumps.forEach((jump) => jump.querySelectorAll("button").forEach((button, index) => {
+    const guideIsOpen = screens[currentScreen]?.dataset.screen === "guide";
+    button.classList.toggle("is-active", guideIsOpen && index === currentStep);
+    button.setAttribute("aria-current", guideIsOpen && index === currentStep ? "step" : "false");
+  }));
 
   prevButton.disabled = false;
   nextButton.textContent =
@@ -296,8 +298,8 @@ prevScreenButtons.forEach((button) => {
 function openGuide() {
   currentStep = 0;
   applyProvider(provider);
-  renderStep();
   goToScreen(screens.findIndex((screen) => screen.dataset.screen === "guide"));
+  renderStep();
 }
 
 openGuideButtons.forEach((button) => {
@@ -332,16 +334,26 @@ navButtons.forEach((button) => {
   });
 });
 
-stepNames.forEach((name, index) => {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.innerHTML = `<span>${index + 1}</span>${name}`;
-  button.addEventListener("click", () => {
-    currentStep = index;
-    renderStep();
-    guide.scrollTo({ top: 0, behavior: "smooth" });
+stepJumps.forEach((jump) => {
+  stepNames.forEach((name, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.stepTarget = String(index + 1);
+    button.innerHTML = `<span>${index + 1}</span>${name}`;
+    button.addEventListener("click", () => {
+      currentStep = index;
+      goToScreen(screens.findIndex((screen) => screen.dataset.screen === "guide"));
+      renderStep();
+      guide.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    jump.append(button);
   });
-  stepJump.append(button);
+});
+
+homeLink.addEventListener("click", (event) => {
+  event.preventDefault();
+  currentStep = 0;
+  goToScreen(screens.findIndex((screen) => screen.dataset.screen === "home"));
 });
 
 const glossaryList = document.querySelector("[data-glossary-list]");

@@ -520,6 +520,14 @@ h3 {
 
 .step-jump button.is-active span { background: var(--teal); color: white; }
 
+.setup-step-jump {
+  margin: 0 0 30px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.62);
+}
+
 .info-page { padding: clamp(42px, 6vw, 72px) clamp(20px, 5vw, 72px); }
 .info-page.screen.is-screen-active { display: block; }
 .glossary-search { display: block; max-width: 560px; margin-bottom: 28px; font-weight: 750; }

@@ -10,11 +10,11 @@
       name="description"
       content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
-    <link rel="stylesheet" href="styles.css?v=20260702-2" />
+    <link rel="stylesheet" href="styles.css?v=20260702-3" />
   </head>
   <body>
     <header class="site-header">
-      <a class="site-brand" href="#top">
+      <a class="site-brand" href="#top" data-home-link>
         <img src="assets/logo2.png" alt="Вайбкодинг логотип" class="site-logo" />
         <span class="site-name">Вайбкодинг гайд</span>
       </a>
@@ -63,41 +63,48 @@
           </p>
         </div>
 
+        <nav class="step-jump setup-step-jump" aria-label="Быстрый переход по шагам" data-step-jump></nav>
+
         <ol class="plan-grid plan-grid-wide">
           <li>
             <span>1</span>
-            <strong>Claude или ChatGPT</strong>
-            <p>Создать аккаунт в одном из сервисов.</p>
+            <strong>Аккаунт ИИ-сервиса</strong>
+            <p>Создать аккаунт Claude или ChatGPT и проверить вход.</p>
           </li>
           <li>
             <span>2</span>
             <strong><button class="term inline-term" type="button" data-term="subscription">Подписка</button></strong>
-            <p>Claude Pro или ChatGPT Plus: примерно $20/месяц.</p>
+            <p>Подключить Claude Pro или ChatGPT Plus.</p>
           </li>
           <li>
             <span>3</span>
-            <strong>Установка <button class="term inline-term" type="button" data-term="git">Git</button></strong>
-            <p>Отдельная инструкция для Windows и macOS.</p>
+            <strong>Операционная система</strong>
+            <p>Выбрать Windows или macOS для подходящей инструкции.</p>
           </li>
           <li>
             <span>4</span>
-            <strong><button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button></strong>
-            <p>Скачать и установить приложение.</p>
+            <strong>Установка <button class="term inline-term" type="button" data-term="git">Git</button></strong>
+            <p>Установить систему сохранения истории проекта.</p>
           </li>
           <li>
             <span>5</span>
-            <strong>Аккаунт <button class="term inline-term" type="button" data-term="github">GitHub</button></strong>
-            <p>Создать аккаунт и подтвердить почту.</p>
+            <strong>Приложение для кода</strong>
+            <p>Установить <button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button>.</p>
           </li>
           <li>
             <span>6</span>
-            <strong><button class="term inline-term" type="button" data-term="token">GitHub token</button></strong>
-            <p>Создать и сохранить ключ доступа.</p>
+            <strong>Аккаунт <button class="term inline-term" type="button" data-term="github">GitHub</button></strong>
+            <p>Создать аккаунт и подтвердить электронную почту.</p>
           </li>
           <li>
             <span>7</span>
-            <strong>Передача token</strong>
-            <p>Подключить GitHub к выбранному приложению.</p>
+            <strong><button class="term inline-term" type="button" data-term="token">GitHub token</button></strong>
+            <p>Создать и безопасно сохранить ключ доступа.</p>
+          </li>
+          <li>
+            <span>8</span>
+            <strong>Папка проекта</strong>
+            <p>Создать рабочую папку и открыть её в приложении.</p>
           </li>
         </ol>
 
@@ -120,6 +127,8 @@
             нужный инструмент: <button class="term" type="button" data-term="claude-code">Claude Code</button> для Claude или <button class="term" type="button" data-term="codex">Codex</button> для ChatGPT.
           </p>
         </div>
+
+        <nav class="step-jump setup-step-jump" aria-label="Быстрый переход по шагам" data-step-jump></nav>
 
         <div class="choice-grid">
           <article class="choice-card">
@@ -456,6 +465,6 @@
       <p data-term-body></p>
     </div>
 
-    <script src="script.js?v=20260702-2"></script>
+    <script src="script.js?v=20260702-3"></script>
   </body>
 </html>
