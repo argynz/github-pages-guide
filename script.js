@@ -142,13 +142,32 @@ const glossary = {
 const stepNames = ["Аккаунт", "Подписка", "Система", "Git", "Приложение", "GitHub", "Токен", "Папка"];
 
 const quizQuestions = [
-  { question: "Для чего нужен Git?", answers: ["Для сохранения истории изменений проекта", "Для оплаты подписки", "Для видеозвонков"], correct: 0 },
-  { question: "Что такое GitHub token?", answers: ["Название проекта", "Ключ доступа к GitHub", "Пароль от компьютера"], correct: 1 },
-  { question: "Можно ли показывать свой token другим?", answers: ["Да, всем", "Только в соцсетях", "Нет, его нужно хранить в секрете"], correct: 2 },
-  { question: "Что хранится в репозитории?", answers: ["Файлы одного проекта", "Только фотографии профиля", "Банковские данные"], correct: 0 },
-  { question: "Что нужно сделать сразу после создания token?", answers: ["Удалить его", "Скопировать и сохранить", "Перезагрузить компьютер"], correct: 1 },
-  { question: "Для чего нужна папка проекта?", answers: ["Для файлов будущего сайта", "Для установки Windows", "Для писем GitHub"], correct: 0 },
+  { question: "Для чего нужен Git?", answers: ["Для сохранения истории изменений проекта", "Для оплаты подписки", "Для создания паролей"], correct: 0 },
+  { question: "Что точнее всего описывает GitHub token?", answers: ["Временный ключ доступа к GitHub", "Название аккаунта", "Архив проекта"], correct: 0 },
+  { question: "Почему GitHub token нельзя отправлять другим людям?", answers: ["С его помощью могут получить доступ к вашим проектам", "Он перестанет подходить к Windows", "Он занимает место в репозитории"], correct: 0 },
+  { question: "Что такое репозиторий?", answers: ["Папка проекта на GitHub вместе с историей изменений", "Программа для оплаты подписки", "Вид операционной системы"], correct: 0 },
+  { question: "Что нужно сделать сразу после создания token?", answers: ["Скопировать и безопасно сохранить", "Опубликовать в чате", "Переименовать компьютер"], correct: 0 },
+  { question: "Для чего нужна папка проекта?", answers: ["В ней приложение создаёт и меняет файлы сайта", "Она хранит пароль от Google", "Она заменяет GitHub"], correct: 0 },
+  { question: "Что делает GitHub Pages?", answers: ["Публикует сайт из файлов репозитория", "Устанавливает Git", "Создаёт подписку ChatGPT"], correct: 0 },
+  { question: "Что означает Expiration при создании token?", answers: ["Срок действия ключа", "Имя репозитория", "Язык интерфейса"], correct: 0 },
+  { question: "Для чего разрешение workflow у GitHub token?", answers: ["Для работы с автоматическими процессами GitHub", "Для смены email", "Для загрузки Windows"], correct: 0 },
+  { question: "Что означает разрешение repo?", answers: ["Доступ к репозиториям", "Доступ к микрофону", "Оплату тарифа"], correct: 0 },
+  { question: "Что такое терминал?", answers: ["Окно для выполнения текстовых команд", "Корзина удалённых файлов", "Страница регистрации"], correct: 0 },
+  { question: "Что такое Homebrew?", answers: ["Установщик программ для macOS", "Браузер GitHub", "Режим Claude"], correct: 0 },
+  { question: "Чем Claude Code и Codex отличаются от обычного чата?", answers: ["Они могут работать с файлами выбранного проекта", "Они не используют интернет", "Они работают только на телефоне"], correct: 0 },
+  { question: "Что означает Local в Codex?", answers: ["Работа с папкой и файлами на компьютере", "Публичная публикация сайта", "Локальный язык интерфейса"], correct: 0 },
+  { question: "Зачем подтверждать email в GitHub?", answers: ["Чтобы подтвердить доступ к адресу и завершить настройку", "Чтобы установить Git", "Чтобы создать папку на компьютере"], correct: 0 },
+  { question: "Что такое капча?", answers: ["Проверка, что действие выполняет человек", "Ключ от репозитория", "Команда для терминала"], correct: 0 },
+  { question: "Как безопаснее войти в сервис на разных устройствах?", answers: ["Через свой подтверждённый Google-аккаунт", "Через чужой token", "Без пароля и почты"], correct: 0 },
+  { question: "Как понять, что папка подключена к Codex?", answers: ["Её название отображается рядом с полем задания", "Открывается GitHub Pages", "Исчезает кнопка входа"], correct: 0 },
 ];
+
+const glossaryIcons = {
+  github: "GH", "github-pages": "↗", token: "🔑", repository: "▣", subscription: "★",
+  "claude-code": "CC", codex: "CX", "google-account": "G", captcha: "✓", git: "⑂",
+  terminal: ">_", command: "/", homebrew: "⌘", windows: "⊞", macos: "●",
+  email: "@", "project-folder": "▰", "chat-mode": "◌", "local-mode": "⌂",
+};
 
 function renderScreen() {
   screens.forEach((screen, index) => {
@@ -331,8 +350,8 @@ const glossaryEmpty = document.querySelector("[data-glossary-empty]");
 
 function renderGlossary(query = "") {
   const normalized = query.trim().toLowerCase();
-  const entries = Object.values(glossary).filter((item) => `${item.title} ${item.body}`.toLowerCase().includes(normalized));
-  glossaryList.innerHTML = entries.map((item) => `<article class="glossary-card"><h3>${item.title}</h3><p>${item.body}</p></article>`).join("");
+  const entries = Object.entries(glossary).filter(([, item]) => `${item.title} ${item.body}`.toLowerCase().includes(normalized));
+  glossaryList.innerHTML = entries.map(([key, item]) => `<article class="glossary-card"><div class="glossary-icon" aria-hidden="true">${glossaryIcons[key] || "?"}</div><div><h3>${item.title}</h3><p>${item.body}</p></div></article>`).join("");
   glossaryEmpty.hidden = entries.length > 0;
 }
 
@@ -343,21 +362,45 @@ const quizList = document.querySelector("[data-quiz-list]");
 const quizForm = document.querySelector("[data-quiz-form]");
 const quizResult = document.querySelector("[data-quiz-result]");
 
-quizList.innerHTML = quizQuestions.map((item, questionIndex) => `
-  <fieldset class="quiz-question">
-    <legend><span>${questionIndex + 1}</span>${item.question}</legend>
-    ${item.answers.map((answer, answerIndex) => `<label><input type="radio" name="question-${questionIndex}" value="${answerIndex}" required><span>${answer}</span></label>`).join("")}
-  </fieldset>`).join("");
+let activeQuiz = [];
+
+function shuffle(items) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [result[index], result[randomIndex]] = [result[randomIndex], result[index]];
+  }
+  return result;
+}
+
+function renderQuiz() {
+  activeQuiz = shuffle(quizQuestions).slice(0, 10).map((item) => {
+    const correctAnswer = item.answers[item.correct];
+    const answers = shuffle(item.answers);
+    return { ...item, answers, correct: answers.indexOf(correctAnswer) };
+  });
+
+  quizList.innerHTML = activeQuiz.map((item, questionIndex) => `
+    <fieldset class="quiz-question">
+      <legend><span>${questionIndex + 1}</span>${item.question}</legend>
+      ${item.answers.map((answer, answerIndex) => `<label><input type="radio" name="question-${questionIndex}" value="${answerIndex}" required><span>${answer}</span></label>`).join("")}
+    </fieldset>`).join("");
+}
+
+renderQuiz();
 
 quizForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const data = new FormData(quizForm);
-  const score = quizQuestions.reduce((total, item, index) => total + (Number(data.get(`question-${index}`)) === item.correct ? 1 : 0), 0);
+  const score = activeQuiz.reduce((total, item, index) => total + (Number(data.get(`question-${index}`)) === item.correct ? 1 : 0), 0);
   quizResult.hidden = false;
-  quizResult.innerHTML = `<strong>${score} из ${quizQuestions.length}</strong><p>${score === quizQuestions.length ? "Отлично! Всё готово к практике." : score >= 4 ? "Хороший результат. Ошибки можно быстро проверить в глоссарии." : "Стоит ещё раз пройти гайд — после этого тест станет лёгким."}</p>`;
+  quizResult.innerHTML = `<strong>${score} из ${activeQuiz.length}</strong><p>${score === activeQuiz.length ? "Отлично! Всё готово к практике." : score >= 7 ? "Хороший результат. Ошибки можно быстро проверить в глоссарии." : "Стоит ещё раз пройти гайд и заглянуть в глоссарий."}</p>`;
 });
 
-quizForm.addEventListener("reset", () => { quizResult.hidden = true; });
+quizForm.addEventListener("reset", () => {
+  quizResult.hidden = true;
+  window.setTimeout(renderQuiz, 0);
+});
 
 document.addEventListener("click", (event) => {
   const termButton = event.target.closest("[data-term]");

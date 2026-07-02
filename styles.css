@@ -526,9 +526,13 @@ h3 {
 .glossary-search span { display: block; margin-bottom: 8px; }
 .glossary-search input { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); font: inherit; }
 .glossary-search input:focus { outline: 3px solid rgba(20, 184, 166, 0.2); border-color: var(--teal); }
-.glossary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.glossary-card { padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: white; box-shadow: 0 8px 24px rgba(16, 45, 47, 0.05); }
-.glossary-card h3 { color: var(--teal); }
+.glossary-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.glossary-card { display: grid; grid-template-columns: 54px 1fr; gap: 16px; align-items: start; min-height: 180px; padding: 24px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(145deg, #fff, #f6faf9); box-shadow: 0 10px 28px rgba(16, 45, 47, 0.07); transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease; }
+.glossary-card:hover { transform: translateY(-3px); border-color: rgba(15, 118, 110, 0.4); box-shadow: 0 16px 34px rgba(16, 45, 47, 0.11); }
+.glossary-icon { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 14px; background: linear-gradient(135deg, var(--teal), var(--blue)); color: white; font-size: 18px; font-weight: 850; letter-spacing: -0.04em; box-shadow: 0 8px 18px rgba(15, 118, 110, 0.2); }
+.glossary-card:nth-child(3n + 2) .glossary-icon { background: linear-gradient(135deg, var(--blue), #6d5ce7); }
+.glossary-card:nth-child(3n) .glossary-icon { background: linear-gradient(135deg, var(--coral), #ef9c5e); }
+.glossary-card h3 { margin-top: 3px; color: var(--dark); }
 .glossary-card p { margin: 8px 0 0; color: var(--muted); }
 .empty-message { color: var(--muted); font-size: 18px; }
 .quiz-card { max-width: 900px; padding: clamp(22px, 4vw, 38px); border: 1px solid var(--line); border-radius: 8px; background: white; box-shadow: var(--shadow); }

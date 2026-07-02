@@ -10,7 +10,7 @@
       name="description"
       content="Пошаговый гайд для новичков: аккаунт, подписка, Git, Claude Code или Codex, GitHub и token."
     />
-    <link rel="stylesheet" href="styles.css?v=20260702-1" />
+    <link rel="stylesheet" href="styles.css?v=20260702-2" />
   </head>
   <body>
     <header class="site-header">
@@ -393,10 +393,16 @@
             </div>
 
             <div data-provider-panel="chatgpt" hidden>
-              <div class="placeholder-panel">
-                <strong>Скриншот Codex добавим позже</strong>
-                <p>Пока откройте Codex, оставьте режим <button class="term" type="button" data-term="local-mode">Local</button> и выберите созданную папку проекта.</p>
-              </div>
+              <p class="provider-hint">В Codex прикрепите папку как новый проект:</p>
+              <ol class="action-list codex-picture-steps">
+                <li>Нажмите <code>Choose project</code> под полем для задания.</li>
+                <li>Выберите <code>New project</code>.</li>
+                <li>Нажмите <code>Использовать существующую папку</code> и укажите созданную папку проекта.</li>
+              </ol>
+              <a class="screenshot-link" href="assets/codex-select-project.png" target="_blank" rel="noreferrer" aria-label="Открыть подсказку по выбору папки в Codex крупнее">
+                <img class="instruction-shot wide-shot" src="assets/codex-select-project.png" alt="Три действия для прикрепления существующей папки проекта в Codex" />
+              </a>
+              <p class="image-caption">Красные стрелки на изображении показывают последовательность действий 1–3.</p>
             </div>
 
             <div class="beginner-note">Готово, если приложение показывает название вашей папки. Инструкцию по передаче token добавим следующим этапом.</div>
@@ -431,7 +437,7 @@
         <div class="section-heading">
           <p class="eyebrow">Закрепление</p>
           <h2>Небольшой тест</h2>
-          <p>Шесть вопросов без подвохов. Можно проходить сколько угодно раз.</p>
+          <p>10 случайных вопросов по шагам и терминам. При новом прохождении вопросы и варианты перемешиваются.</p>
         </div>
         <form class="quiz-card" data-quiz-form>
           <div data-quiz-list></div>
@@ -450,6 +456,6 @@
       <p data-term-body></p>
     </div>
 
-    <script src="script.js?v=20260702-1"></script>
+    <script src="script.js?v=20260702-2"></script>
   </body>
 </html>
