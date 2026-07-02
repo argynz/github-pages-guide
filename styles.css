@@ -411,8 +411,7 @@ h3 {
   font-size: 19px;
 }
 
-.choice-badge,
-.official-link {
+.choice-badge {
   width: max-content;
   max-width: 100%;
   border-radius: 8px;
@@ -430,14 +429,6 @@ h3 {
 .alt-badge {
   background: #edf2ff;
   color: var(--blue);
-}
-
-.official-link {
-  padding: 10px 12px;
-  background: #f6faf9;
-  border: 1px solid var(--line);
-  color: var(--dark);
-  text-decoration: none;
 }
 
 .guide-shell {
