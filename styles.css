@@ -468,12 +468,8 @@ h3 {
 }
 
 .step-jump {
-  display: grid;
-  grid-template-columns: repeat(10, minmax(92px, 1fr));
+  display: none;
   gap: 8px;
-  margin: -10px 0 28px;
-  overflow-x: auto;
-  padding-bottom: 4px;
 }
 
 .step-jump button {
@@ -512,11 +508,40 @@ h3 {
 .step-jump button.is-active span { background: var(--teal); color: white; }
 
 .setup-step-jump {
-  margin: 0 0 30px;
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.62);
+  margin: 0;
+}
+
+@media (min-width: 1280px) {
+  .setup-plan,
+  .choice-screen,
+  .guide-shell {
+    padding-left: 240px;
+  }
+
+  .step-jump {
+    position: fixed;
+    top: 80px;
+    bottom: 20px;
+    left: 18px;
+    z-index: 30;
+    display: flex;
+    width: 196px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+  }
+
+  .step-jump button {
+    width: 100%;
+    min-width: 0;
+    flex: 0 0 auto;
+  }
 }
 
 .info-page { padding: clamp(42px, 6vw, 72px) clamp(20px, 5vw, 72px); }

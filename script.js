@@ -142,15 +142,15 @@ const glossary = {
 
 const routeSteps = [
   { number: 0, name: "Общий план", screen: "plan" },
-  { number: 1, name: "Инструмент", screen: "choice" },
-  { number: 2, name: "Аккаунт", guideIndex: 0 },
-  { number: 3, name: "Подписка", guideIndex: 1 },
-  { number: 4, name: "Система", guideIndex: 2 },
-  { number: 5, name: "Git", guideIndex: 3 },
-  { number: 6, name: "Приложение", guideIndex: 4 },
-  { number: 7, name: "GitHub", guideIndex: 5 },
-  { number: 8, name: "Токен", guideIndex: 6 },
-  { number: 9, name: "Папка", guideIndex: 7 },
+  { number: 0, name: "Инструмент", screen: "choice" },
+  { number: 1, name: "Аккаунт", guideIndex: 0 },
+  { number: 2, name: "Подписка", guideIndex: 1 },
+  { number: 3, name: "Система", guideIndex: 2 },
+  { number: 4, name: "Git", guideIndex: 3 },
+  { number: 5, name: "Приложение", guideIndex: 4 },
+  { number: 6, name: "GitHub", guideIndex: 5 },
+  { number: 7, name: "Токен", guideIndex: 6 },
+  { number: 8, name: "Папка", guideIndex: 7 },
 ];
 
 const quizQuestions = [
@@ -202,16 +202,16 @@ function renderStep() {
     step.classList.toggle("is-active", index === currentStep);
   });
 
-  currentStepLabel.textContent = String(currentStep + 2);
-  totalStepsLabel.textContent = String(steps.length + 1);
-  progressBar.style.width = `${((currentStep + 2) / (steps.length + 1)) * 100}%`;
+  currentStepLabel.textContent = String(currentStep + 1);
+  totalStepsLabel.textContent = String(steps.length);
+  progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
 
   stepJumps.forEach((jump) => jump.querySelectorAll("button").forEach((button) => {
     const activeScreen = screens[currentScreen]?.dataset.screen;
     const target = Number(button.dataset.stepTarget);
-    const isActive = (activeScreen === "plan" && target === 0) ||
-      (activeScreen === "choice" && target === 1) ||
-      (activeScreen === "guide" && target === currentStep + 2);
+    const routeScreen = button.dataset.routeScreen;
+    const isActive = (activeScreen === routeScreen) ||
+      (activeScreen === "guide" && !routeScreen && target === currentStep + 1);
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-current", isActive ? "step" : "false");
   }));
@@ -355,6 +355,7 @@ stepJumps.forEach((jump) => {
     const button = document.createElement("button");
     button.type = "button";
     button.dataset.stepTarget = String(routeStep.number);
+    if (routeStep.screen) button.dataset.routeScreen = routeStep.screen;
     button.innerHTML = `<span>${routeStep.number}</span>${routeStep.name}`;
     button.addEventListener("click", () => {
       if (routeStep.screen) {
