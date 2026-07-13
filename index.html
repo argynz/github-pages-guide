@@ -104,6 +104,11 @@
             <strong>Папка проекта</strong>
             <p>Создать рабочую папку и открыть её в приложении.</p>
           </li>
+          <li>
+            <span>8</span>
+            <strong>Связь Codex и GitHub</strong>
+            <p>Авторизовать GitHub аккаунт через Codex и GitHub CLI.</p>
+          </li>
         </ol>
 
         <div class="screen-actions">
@@ -168,7 +173,7 @@
             <h2>Делайте по одному шагу</h2>
           </div>
           <div class="progress-label" aria-live="polite">
-            <span data-provider-label>ChatGPT</span>: шаг <span data-current-step>1</span> из <span data-total-steps>7</span>
+            <span data-provider-label>ChatGPT</span>: шаг <span data-current-step>1</span> из <span data-total-steps>8</span>
           </div>
         </div>
 
@@ -384,6 +389,39 @@
 
             <div class="beginner-note">Готово, если приложение показывает название вашей папки и готово принимать задания.</div>
           </div>
+        </article>
+
+        <article class="guide-step" data-step="8">
+          <div class="step-copy">
+            <p class="eyebrow">Шаг 8</p>
+            <h3>Подключите GitHub аккаунт к Codex</h3>
+            <p>
+              Теперь нужно авторизовать <button class="term" type="button" data-term="github">GitHub</button>
+              внутри Codex, чтобы Codex мог работать с вашим аккаунтом и отправлять проект в GitHub.
+            </p>
+            <ol class="action-list">
+              <li>Откройте приложение <button class="term" type="button" data-term="codex">Codex</button> и убедитесь, что выбрана папка проекта.</li>
+              <li>В чат Codex вставьте этот текст целиком:</li>
+            </ol>
+            <div class="code-sample"><code>Выполни gh auth login --hostname github.com --git-protocol https --web без интерактивного TTY, чтобы команда вывела device code и ссылку.</code></div>
+            <ol class="action-list action-list-continued">
+              <li>Codex запустит команду и покажет ссылку <code>https://github.com/login/device</code> и <button class="term" type="button" data-term="device-code">device code</button>.</li>
+              <li><strong>Важно:</strong> откройте ссылку в том же браузере, где вы создавали или открывали аккаунт GitHub.</li>
+              <li>На странице GitHub вставьте код, который выдал Codex, и подтвердите авторизацию.</li>
+              <li>Вернитесь в Codex и дождитесь сообщения, что вход выполнен успешно.</li>
+            </ol>
+            <div class="beginner-note">
+              Готово, если GitHub принял код, а Codex больше не просит авторизоваться в GitHub.
+            </div>
+          </div>
+          <aside class="screen-card">
+            <span class="screen-label">Пример вывода</span>
+            <h4>Код и ссылка для GitHub</h4>
+            <a class="screenshot-link" href="assets/codex-gh-auth-device.png" target="_blank" rel="noreferrer" aria-label="Открыть пример device code крупнее">
+              <img class="instruction-shot wide-shot" src="assets/codex-gh-auth-device.png" alt="Пример вывода Codex: ссылка GitHub device login и код для авторизации" />
+            </a>
+            <p>На вашем экране код будет другим. Используйте именно тот код, который показал Codex.</p>
+          </aside>
         </article>
 
         <div class="guide-controls">

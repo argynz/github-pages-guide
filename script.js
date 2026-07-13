@@ -134,6 +134,10 @@ const glossary = {
     title: "Папка проекта",
     body: "Это обычная папка на компьютере, куда приложение будет складывать все файлы одного сайта.",
   },
+  "device-code": {
+    title: "Device code",
+    body: "Это короткий одноразовый код для входа. Codex показывает код, вы вводите его на GitHub, и GitHub понимает, какой аккаунт подключить.",
+  },
   "chat-mode": {
     title: "Chat",
     body: "Обычный чат с Claude: подходит для вопросов, обсуждения идеи и подготовки плана. Сам по себе не работает с папкой проекта.",
@@ -154,6 +158,7 @@ const routeSteps = [
   { number: 5, name: "Приложение", guideIndex: 4 },
   { number: 6, name: "GitHub", guideIndex: 5 },
   { number: 7, name: "Папка", guideIndex: 6 },
+  { number: 8, name: "Связь", guideIndex: 7 },
 ];
 
 const stepPurpose = {
@@ -163,6 +168,7 @@ const stepPurpose = {
   5: "Это приложение, через которое будем вайбкодить: оно открывает папку проекта и помогает менять файлы.",
   6: "GitHub нужен для хранения проекта и дальнейшей публикации сайта.",
   7: "Создайте и выберите папку, чтобы Codex или Claude Code могли работать внутри неё и создать там проект.",
+  8: "Подключите GitHub аккаунт к Codex, чтобы Codex мог отправлять файлы проекта в ваш GitHub.",
 };
 
 const quizQuestions = [
@@ -173,6 +179,7 @@ const quizQuestions = [
   { question: "Что такое терминал?", answers: ["Окно для выполнения текстовых команд", "Корзина удалённых файлов", "Страница регистрации"], correct: 0 },
   { question: "Что такое Homebrew?", answers: ["Установщик программ для macOS", "Браузер GitHub", "Режим Claude"], correct: 0 },
   { question: "Для чего нужен GitHub CLI?", answers: ["Чтобы удобнее подключаться к GitHub и работать с проектами через команды", "Чтобы оформить подписку ChatGPT", "Чтобы поменять операционную систему"], correct: 0 },
+  { question: "Что нужно сделать с device code, который покажет Codex?", answers: ["Ввести его на странице GitHub device login", "Отправить его всем участникам тренинга", "Вставить его в название папки проекта"], correct: 0 },
   { question: "Чем Claude Code и Codex отличаются от обычного чата?", answers: ["Они могут работать с файлами выбранного проекта", "Они не используют интернет", "Они работают только на телефоне"], correct: 0 },
   { question: "Что означает Local в Codex?", answers: ["Работа с папкой и файлами на компьютере", "Публичная публикация сайта", "Локальный язык интерфейса"], correct: 0 },
   { question: "Зачем подтверждать email в GitHub?", answers: ["Чтобы подтвердить доступ к адресу и завершить настройку", "Чтобы установить Git", "Чтобы создать папку на компьютере"], correct: 0 },
@@ -185,7 +192,7 @@ const glossaryIcons = {
   github: "GH", "github-pages": "↗", repository: "▣", subscription: "★",
   "claude-code": "CC", codex: "CX", "google-account": "G", captcha: "✓", git: "⑂", "gh-cli": "CLI",
   terminal: ">_", command: "/", homebrew: "⌘", windows: "⊞", macos: "●",
-  email: "@", "project-folder": "▰", "chat-mode": "◌", "local-mode": "⌂",
+  email: "@", "project-folder": "▰", "device-code": "123", "chat-mode": "◌", "local-mode": "⌂",
 };
 
 function updateStepToast() {
