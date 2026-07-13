@@ -15,6 +15,9 @@ const prevButton = document.querySelector("[data-prev-step]");
 const currentStepLabel = document.querySelector("[data-current-step]");
 const totalStepsLabel = document.querySelector("[data-total-steps]");
 const progressBar = document.querySelector("[data-progress-bar]");
+const stepToast = document.querySelector("[data-step-toast]");
+const stepToastText = document.querySelector("[data-step-toast-text]");
+const stepToastClose = document.querySelector("[data-step-toast-close]");
 const termPopover = document.querySelector("[data-term-popover]");
 const termTitle = document.querySelector("[data-term-title]");
 const termBody = document.querySelector("[data-term-body]");
@@ -24,6 +27,7 @@ let currentScreen = 0;
 let currentStep = 0;
 let provider = "chatgpt";
 let platform = "windows";
+let dismissedToastKey = "";
 
 const providerCopy = {
   claude: {
@@ -70,10 +74,6 @@ const glossary = {
     title: "GitHub Pages",
     body: "Это бесплатная витрина для сайта: GitHub берет ваши HTML/CSS/JS файлы и показывает их по ссылке.",
   },
-  token: {
-    title: "GitHub token",
-    body: "Это временный ключ от GitHub. Он нужен инструменту, чтобы отправить код за вас. Его нельзя показывать другим.",
-  },
   repository: {
     title: "Репозиторий",
     body: "Это отдельная папка проекта на GitHub: все файлы сайта лежат в одном месте.",
@@ -101,6 +101,10 @@ const glossary = {
   git: {
     title: "Git",
     body: "Это система сохранений для проекта: она запоминает изменения и помогает отправить файлы на GitHub.",
+  },
+  "gh-cli": {
+    title: "GitHub CLI",
+    body: "Это официальный инструмент GitHub для командной строки. Он помогает приложению удобнее подключаться к GitHub и работать с проектами.",
   },
   terminal: {
     title: "Терминал",
@@ -149,37 +153,67 @@ const routeSteps = [
   { number: 4, name: "Git", guideIndex: 3 },
   { number: 5, name: "Приложение", guideIndex: 4 },
   { number: 6, name: "GitHub", guideIndex: 5 },
-  { number: 7, name: "Токен", guideIndex: 6 },
-  { number: 8, name: "Папка", guideIndex: 7 },
+  { number: 7, name: "Папка", guideIndex: 6 },
 ];
+
+const stepPurpose = {
+  choice: "Выберите инструмент: если у вас нет подписки ни на одном сервисе, берите ChatGPT. Если уже есть подписка Claude, выбирайте Claude.",
+  2: "Подписка даёт больше возможностей и меньше ограничений. Для ChatGPT она полезна, но не обязательна; для Claude Code — нужна для нормальной работы.",
+  4: "Git нужен, чтобы Codex или Claude Code могли сохранять изменения и дальше работать с GitHub.",
+  5: "Это приложение, через которое будем вайбкодить: оно открывает папку проекта и помогает менять файлы.",
+  6: "GitHub нужен для хранения проекта и дальнейшей публикации сайта.",
+  7: "Создайте и выберите папку, чтобы Codex или Claude Code могли работать внутри неё и создать там проект.",
+};
 
 const quizQuestions = [
   { question: "Для чего нужен Git?", answers: ["Для сохранения истории изменений проекта", "Для оплаты подписки", "Для создания паролей"], correct: 0 },
-  { question: "Что точнее всего описывает GitHub token?", answers: ["Временный ключ доступа к GitHub", "Название аккаунта", "Архив проекта"], correct: 0 },
-  { question: "Почему GitHub token нельзя отправлять другим людям?", answers: ["С его помощью могут получить доступ к вашим проектам", "Он перестанет подходить к Windows", "Он занимает место в репозитории"], correct: 0 },
   { question: "Что такое репозиторий?", answers: ["Папка проекта на GitHub вместе с историей изменений", "Программа для оплаты подписки", "Вид операционной системы"], correct: 0 },
-  { question: "Что нужно сделать сразу после создания token?", answers: ["Скопировать и безопасно сохранить", "Опубликовать в чате", "Переименовать компьютер"], correct: 0 },
   { question: "Для чего нужна папка проекта?", answers: ["В ней приложение создаёт и меняет файлы сайта", "Она хранит пароль от Google", "Она заменяет GitHub"], correct: 0 },
   { question: "Что делает GitHub Pages?", answers: ["Публикует сайт из файлов репозитория", "Устанавливает Git", "Создаёт подписку ChatGPT"], correct: 0 },
-  { question: "Что означает Expiration при создании token?", answers: ["Срок действия ключа", "Имя репозитория", "Язык интерфейса"], correct: 0 },
-  { question: "Для чего разрешение workflow у GitHub token?", answers: ["Для работы с автоматическими процессами GitHub", "Для смены email", "Для загрузки Windows"], correct: 0 },
-  { question: "Что означает разрешение repo?", answers: ["Доступ к репозиториям", "Доступ к микрофону", "Оплату тарифа"], correct: 0 },
   { question: "Что такое терминал?", answers: ["Окно для выполнения текстовых команд", "Корзина удалённых файлов", "Страница регистрации"], correct: 0 },
   { question: "Что такое Homebrew?", answers: ["Установщик программ для macOS", "Браузер GitHub", "Режим Claude"], correct: 0 },
+  { question: "Для чего нужен GitHub CLI?", answers: ["Чтобы удобнее подключаться к GitHub и работать с проектами через команды", "Чтобы оформить подписку ChatGPT", "Чтобы поменять операционную систему"], correct: 0 },
   { question: "Чем Claude Code и Codex отличаются от обычного чата?", answers: ["Они могут работать с файлами выбранного проекта", "Они не используют интернет", "Они работают только на телефоне"], correct: 0 },
   { question: "Что означает Local в Codex?", answers: ["Работа с папкой и файлами на компьютере", "Публичная публикация сайта", "Локальный язык интерфейса"], correct: 0 },
   { question: "Зачем подтверждать email в GitHub?", answers: ["Чтобы подтвердить доступ к адресу и завершить настройку", "Чтобы установить Git", "Чтобы создать папку на компьютере"], correct: 0 },
   { question: "Что такое капча?", answers: ["Проверка, что действие выполняет человек", "Ключ от репозитория", "Команда для терминала"], correct: 0 },
-  { question: "Как безопаснее войти в сервис на разных устройствах?", answers: ["Через свой подтверждённый Google-аккаунт", "Через чужой token", "Без пароля и почты"], correct: 0 },
+  { question: "Как безопаснее войти в сервис на разных устройствах?", answers: ["Через свой подтверждённый Google-аккаунт", "Через чужой аккаунт", "Без пароля и почты"], correct: 0 },
   { question: "Как понять, что папка подключена к Codex?", answers: ["Её название отображается рядом с полем задания", "Открывается GitHub Pages", "Исчезает кнопка входа"], correct: 0 },
 ];
 
 const glossaryIcons = {
-  github: "GH", "github-pages": "↗", token: "🔑", repository: "▣", subscription: "★",
-  "claude-code": "CC", codex: "CX", "google-account": "G", captcha: "✓", git: "⑂",
+  github: "GH", "github-pages": "↗", repository: "▣", subscription: "★",
+  "claude-code": "CC", codex: "CX", "google-account": "G", captcha: "✓", git: "⑂", "gh-cli": "CLI",
   terminal: ">_", command: "/", homebrew: "⌘", windows: "⊞", macos: "●",
   email: "@", "project-folder": "▰", "chat-mode": "◌", "local-mode": "⌂",
 };
+
+function updateStepToast() {
+  const activeScreen = screens[currentScreen]?.dataset.screen;
+  const message = activeScreen === "choice" ? stepPurpose.choice : activeScreen === "guide" ? stepPurpose[currentStep + 1] : "";
+  const toastKey = activeScreen === "choice" ? "choice" : activeScreen === "guide" ? `guide-${currentStep + 1}` : "";
+
+  if (!message || dismissedToastKey === toastKey) {
+    stepToast.hidden = true;
+    stepToastText.textContent = "";
+    return;
+  }
+
+  stepToast.hidden = false;
+  stepToastText.textContent = message;
+  stepToast.classList.remove("is-visible");
+  window.requestAnimationFrame(() => {
+    stepToast.classList.add("is-visible");
+  });
+}
+
+function closeStepToast() {
+  const activeScreen = screens[currentScreen]?.dataset.screen;
+  dismissedToastKey = activeScreen === "choice" ? "choice" : activeScreen === "guide" ? `guide-${currentStep + 1}` : "";
+  stepToast.classList.remove("is-visible");
+  stepToast.hidden = true;
+  stepToastText.textContent = "";
+}
 
 function renderScreen() {
   screens.forEach((screen, index) => {
@@ -195,6 +229,7 @@ function goToScreen(index) {
     button.classList.toggle("is-active", button.dataset.nav === activeScreen || (button.dataset.nav === "guide" && ["home", "plan", "choice"].includes(activeScreen)));
   });
   renderStep();
+  updateStepToast();
 }
 
 function renderStep() {
@@ -219,6 +254,7 @@ function renderStep() {
   prevButton.disabled = false;
   nextButton.textContent =
     currentStep === steps.length - 1 ? "Завершить" : "Следующий шаг";
+  updateStepToast();
 }
 
 function setText(selector, value) {
@@ -349,6 +385,8 @@ navButtons.forEach((button) => {
     goToScreen(screens.findIndex((screen) => screen.dataset.screen === target));
   });
 });
+
+stepToastClose.addEventListener("click", closeStepToast);
 
 stepJumps.forEach((jump) => {
   routeSteps.forEach((routeStep) => {
