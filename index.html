@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" href="assets/logo2.png" />
     <meta
       name="description"
-      content="Пошаговый гайд для новичков: аккаунт, подписка, Git, GitHub, Claude Code или Codex."
+      content="Пошаговый гайд для новичков: аккаунт, Git, GitHub, Claude Code или Codex."
     />
     <link rel="stylesheet" href="styles.css?v=20260703-1" />
   </head>
@@ -35,7 +35,6 @@
           <h1>Регистрация и настройка перед созданием сайта</h1>
           <p class="lead">
             Пройдите подготовительные шаги: аккаунт Claude или ChatGPT,
-            <button class="term" type="button" data-term="subscription">подписка</button>,
             установка <button class="term" type="button" data-term="git">Git</button>,
             <button class="term" type="button" data-term="github">GitHub</button>,
             <button class="term" type="button" data-term="claude-code">Claude Code</button> или
@@ -76,36 +75,31 @@
           </li>
           <li>
             <span>2</span>
-            <strong><button class="term inline-term" type="button" data-term="subscription">Подписка</button></strong>
-            <p>Подключить Claude Pro или ChatGPT Plus.</p>
-          </li>
-          <li>
-            <span>3</span>
             <strong>Операционная система</strong>
             <p>Выбрать Windows или macOS для подходящей инструкции.</p>
           </li>
           <li>
-            <span>4</span>
+            <span>3</span>
             <strong>Установка <button class="term inline-term" type="button" data-term="git">Git</button></strong>
             <p>Установить систему сохранения истории проекта.</p>
           </li>
           <li>
-            <span>5</span>
+            <span>4</span>
             <strong>Приложение для кода</strong>
             <p>Установить <button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button>.</p>
           </li>
           <li>
-            <span>6</span>
+            <span>5</span>
             <strong>Аккаунт <button class="term inline-term" type="button" data-term="github">GitHub</button></strong>
             <p>Создать аккаунт и подтвердить электронную почту.</p>
           </li>
           <li>
-            <span>7</span>
+            <span>6</span>
             <strong>Папка проекта</strong>
             <p>Создать рабочую папку и открыть её в приложении.</p>
           </li>
           <li>
-            <span>8</span>
+            <span>7</span>
             <strong>Связь Codex и GitHub</strong>
             <p>Авторизовать GitHub аккаунт через Codex и GitHub CLI.</p>
           </li>
@@ -173,7 +167,7 @@
             <h2>Делайте по одному шагу</h2>
           </div>
           <div class="progress-label" aria-live="polite">
-            <span data-provider-label>ChatGPT</span>: шаг <span data-current-step>1</span> из <span data-total-steps>8</span>
+            <span data-provider-label>ChatGPT</span>: шаг <span data-current-step>1</span> из <span data-total-steps>7</span>
           </div>
         </div>
 
@@ -206,7 +200,7 @@
           </div>
         </article>
 
-        <article class="guide-step" data-step="2">
+        <article class="guide-step" data-disabled-step="subscription" hidden>
           <div class="step-copy">
             <p class="eyebrow">Шаг 2</p>
             <h3>Оформите подписку</h3>
@@ -246,9 +240,9 @@
           </aside>
         </article>
 
-        <article class="guide-step single-step" data-step="3">
+        <article class="guide-step single-step" data-step="2">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 3</p>
+            <p class="eyebrow">Шаг 2</p>
             <h3>Выберите операционную систему</h3>
             <p>
               Дальше инструкция будет отличаться для
@@ -265,9 +259,9 @@
           </div>
         </article>
 
-        <article class="guide-step" data-step="4">
+        <article class="guide-step" data-step="3">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 4</p>
+            <p class="eyebrow">Шаг 3</p>
             <h3>Установите <button class="term" type="button" data-term="git">Git</button></h3>
             <p>
               <button class="term" type="button" data-term="git">Git</button> помогает приложению сохранять изменения и отправлять проект в GitHub.
@@ -309,9 +303,9 @@
           </aside>
         </article>
 
-        <article class="guide-step" data-step="5">
+        <article class="guide-step" data-step="4">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 5</p>
+            <p class="eyebrow">Шаг 4</p>
             <h3>Установите <span data-code-tool>Claude Code</span></h3>
             <p>
               Скачайте приложение для выбранной системы: <strong data-platform-name>Windows</strong>.
@@ -320,7 +314,7 @@
               <li>Откройте официальную ссылку: <a data-tool-download href="#">Скачать приложение</a>.</li>
               <li>Откройте скачанный установщик и завершите установку.</li>
               <li>Запустите <button class="term" type="button" data-term="code-tool"><span data-code-tool>Claude Code</span></button>.</li>
-              <li>Войдите в тот же аккаунт, где оформлена подписка.</li>
+              <li>Войдите в тот же аккаунт, который вы выбрали в начале гайда.</li>
               <li>Убедитесь, что приложение открылось без ошибок.</li>
             </ol>
             <div class="beginner-note">
@@ -335,9 +329,9 @@
           </aside>
         </article>
 
-        <article class="guide-step" data-step="6">
+        <article class="guide-step" data-step="5">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 6</p>
+            <p class="eyebrow">Шаг 5</p>
             <h3>Создайте аккаунт GitHub</h3>
             <p><button class="term" type="button" data-term="github">GitHub</button> нужен, чтобы хранить код и публиковать сайт через <button class="term" type="button" data-term="github-pages">GitHub Pages</button>.</p>
             <ol class="action-list">
@@ -355,9 +349,9 @@
           </aside>
         </article>
 
-        <article class="guide-step single-step" data-step="7">
+        <article class="guide-step single-step" data-step="6">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 7</p>
+            <p class="eyebrow">Шаг 6</p>
             <h3>Создайте папку и откройте её в <span data-code-tool>Claude Code</span></h3>
             <p>Эта <button class="term" type="button" data-term="project-folder">папка проекта</button> станет рабочим местом приложения: здесь появятся файлы будущего сайта.</p>
             <ol class="action-list">
@@ -391,9 +385,9 @@
           </div>
         </article>
 
-        <article class="guide-step" data-step="8">
+        <article class="guide-step" data-step="7">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 8</p>
+            <p class="eyebrow">Шаг 7</p>
             <h3>Подключите GitHub аккаунт к Codex</h3>
             <p>
               Теперь нужно авторизовать <button class="term" type="button" data-term="github">GitHub</button>
