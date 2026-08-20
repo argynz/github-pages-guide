@@ -7,6 +7,11 @@ const platformButtons = Array.from(document.querySelectorAll("[data-platform]"))
 const navButtons = Array.from(document.querySelectorAll("[data-nav]"));
 const stepJumps = Array.from(document.querySelectorAll("[data-step-jump]"));
 const homeLink = document.querySelector("[data-home-link]");
+const settingsModal = document.querySelector("[data-settings-modal]");
+const settingsOpen = document.querySelector("[data-settings-open]");
+const settingsCloseButtons = Array.from(document.querySelectorAll("[data-settings-close]"));
+const tokenHelpButtons = Array.from(document.querySelectorAll("[data-token-help]"));
+const backToGitButtons = Array.from(document.querySelectorAll("[data-back-to-git]"));
 
 const guide = document.querySelector("#guide");
 const steps = Array.from(document.querySelectorAll("[data-step]"));
@@ -45,9 +50,9 @@ const providerCopy = {
     },
   },
   chatgpt: {
-    label: "ChatGPT",
+    label: "Codex",
     providerName: "ChatGPT",
-    codeTool: "Codex",
+    codeTool: "ChatGPT",
     planName: "ChatGPT Plus",
     siteText: "chatgpt.com",
     siteHref: "https://chatgpt.com/",
@@ -77,6 +82,10 @@ const glossary = {
   repository: {
     title: "Репозиторий",
     body: "Это отдельная папка проекта на GitHub: все файлы сайта лежат в одном месте.",
+  },
+  token: {
+    title: "GitHub token",
+    body: "Это запасной ключ доступа к GitHub. Используйте его только если GitHub CLI не получилось установить или авторизовать.",
   },
   "claude-code": {
     title: "Claude Code",
@@ -145,24 +154,20 @@ const glossary = {
 };
 
 const routeSteps = [
-  { number: 0, name: "Общий план", screen: "plan" },
-  { number: 0, name: "Инструмент", screen: "choice" },
   { number: 1, name: "Аккаунт", guideIndex: 0 },
-  { number: 2, name: "Система", guideIndex: 1 },
-  { number: 3, name: "Git", guideIndex: 2 },
-  { number: 4, name: "Приложение", guideIndex: 3 },
-  { number: 5, name: "GitHub", guideIndex: 4 },
-  { number: 6, name: "Папка", guideIndex: 5 },
-  { number: 7, name: "Связь", guideIndex: 6 },
+  { number: 2, name: "Git", guideIndex: 1 },
+  { number: 3, name: "Приложение", guideIndex: 2 },
+  { number: 4, name: "GitHub", guideIndex: 3 },
+  { number: 5, name: "Папка", guideIndex: 4 },
+  { number: 6, name: "Связь", guideIndex: 5 },
 ];
 
 const stepPurpose = {
-  choice: "Выберите инструмент: если вы не уверены, берите ChatGPT. Если уже пользуетесь Claude и хотите работать через него, выбирайте Claude.",
-  3: "Git нужен, чтобы Codex или Claude Code могли сохранять изменения и дальше работать с GitHub.",
-  4: "Это приложение, через которое будем вайбкодить: оно открывает папку проекта и помогает менять файлы.",
-  5: "GitHub нужен для хранения проекта и дальнейшей публикации сайта.",
-  6: "Создайте и выберите папку, чтобы Codex или Claude Code могли работать внутри неё и создать там проект.",
-  7: "Подключите GitHub аккаунт к Codex, чтобы Codex мог отправлять файлы проекта в ваш GitHub.",
+  2: "Git нужен, чтобы ChatGPT/Codex мог сохранять изменения и дальше работать с GitHub.",
+  3: "Это приложение, через которое будем вайбкодить: оно открывает папку проекта и помогает менять файлы.",
+  4: "GitHub нужен для хранения проекта и дальнейшей публикации сайта.",
+  5: "Создайте и выберите папку, чтобы Codex мог работать внутри неё и создать там проект.",
+  6: "Подключите GitHub аккаунт к Codex, чтобы Codex мог отправлять файлы проекта в ваш GitHub.",
 };
 
 const quizQuestions = [
@@ -183,7 +188,7 @@ const quizQuestions = [
 ];
 
 const glossaryIcons = {
-  github: "GH", "github-pages": "↗", repository: "▣",
+  github: "GH", "github-pages": "↗", repository: "▣", token: "🔑",
   "claude-code": "CC", codex: "CX", "google-account": "G", captcha: "✓", git: "⑂", "gh-cli": "CLI",
   terminal: ">_", command: "/", homebrew: "⌘", windows: "⊞", macos: "●",
   email: "@", "project-folder": "▰", "device-code": "123", "chat-mode": "◌", "local-mode": "⌂",
@@ -191,8 +196,8 @@ const glossaryIcons = {
 
 function updateStepToast() {
   const activeScreen = screens[currentScreen]?.dataset.screen;
-  const message = activeScreen === "choice" ? stepPurpose.choice : activeScreen === "guide" ? stepPurpose[currentStep + 1] : "";
-  const toastKey = activeScreen === "choice" ? "choice" : activeScreen === "guide" ? `guide-${currentStep + 1}` : "";
+  const message = activeScreen === "guide" ? stepPurpose[currentStep + 1] : "";
+  const toastKey = activeScreen === "guide" ? `guide-${currentStep + 1}` : "";
 
   if (!message || dismissedToastKey === toastKey) {
     stepToast.hidden = true;
@@ -210,7 +215,7 @@ function updateStepToast() {
 
 function closeStepToast() {
   const activeScreen = screens[currentScreen]?.dataset.screen;
-  dismissedToastKey = activeScreen === "choice" ? "choice" : activeScreen === "guide" ? `guide-${currentStep + 1}` : "";
+  dismissedToastKey = activeScreen === "guide" ? `guide-${currentStep + 1}` : "";
   stepToast.classList.remove("is-visible");
   stepToast.hidden = true;
   stepToastText.textContent = "";
@@ -227,7 +232,7 @@ function goToScreen(index) {
   renderScreen();
   navButtons.forEach((button) => {
     const activeScreen = screens[currentScreen]?.dataset.screen;
-    button.classList.toggle("is-active", button.dataset.nav === activeScreen || (button.dataset.nav === "guide" && ["home", "plan", "choice"].includes(activeScreen)));
+    button.classList.toggle("is-active", button.dataset.nav === activeScreen || (button.dataset.nav === "guide" && activeScreen === "home"));
   });
   renderStep();
   updateStepToast();
@@ -280,6 +285,9 @@ function applyProvider(nextProvider) {
   setText("[data-plan-name]", copy.planName);
   setLink("[data-provider-site]", copy.siteText, copy.siteHref);
   setLink("[data-pricing-site]", copy.pricingText, copy.pricingHref);
+  providerButtons.forEach((button) => {
+    button.classList.toggle("is-selected", button.dataset.provider === provider);
+  });
   document.querySelectorAll("[data-provider-panel]").forEach((panel) => {
     panel.hidden = panel.dataset.providerPanel !== provider;
   });
@@ -362,7 +370,6 @@ openGuideButtons.forEach((button) => {
 providerButtons.forEach((button) => {
   button.addEventListener("click", () => {
     applyProvider(button.dataset.provider);
-    openGuide();
   });
 });
 
@@ -370,8 +377,34 @@ platformButtons.forEach((button) => {
   button.addEventListener("click", () => {
     platform = button.dataset.platform;
     renderInstallChoice();
-    currentStep = Math.min(currentStep + 1, steps.length - 1);
     renderStep();
+  });
+});
+
+function openSettings() {
+  settingsModal.hidden = false;
+}
+
+function closeSettings() {
+  settingsModal.hidden = true;
+}
+
+settingsOpen.addEventListener("click", openSettings);
+
+settingsCloseButtons.forEach((button) => {
+  button.addEventListener("click", closeSettings);
+});
+
+tokenHelpButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    goToScreen(screens.findIndex((screen) => screen.dataset.screen === "token-help"));
+  });
+});
+
+backToGitButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentStep = 1;
+    goToScreen(screens.findIndex((screen) => screen.dataset.screen === "guide"));
     guide.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
@@ -515,7 +548,7 @@ prevButton.addEventListener("click", () => {
     return;
   }
 
-  goToScreen(screens.findIndex((screen) => screen.dataset.screen === "choice"));
+  goToScreen(screens.findIndex((screen) => screen.dataset.screen === "home"));
 });
 
 applyProvider(provider);

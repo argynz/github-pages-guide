@@ -19,6 +19,7 @@
         <span class="site-name">Вайбкодинг гайд</span>
       </a>
       <nav class="site-nav" aria-label="Основная навигация">
+        <button type="button" data-settings-open>Выбор системы</button>
         <button type="button" data-nav="guide">Гайд</button>
         <button type="button" data-nav="glossary">Глоссарий</button>
         <button type="button" data-nav="quiz">Тест</button>
@@ -27,6 +28,32 @@
     <div class="step-purpose-toast" hidden data-step-toast aria-live="polite">
       <button class="step-purpose-close" type="button" aria-label="Закрыть подсказку" data-step-toast-close>×</button>
       <div data-step-toast-text></div>
+    </div>
+    <div class="settings-modal" hidden data-settings-modal>
+      <div class="settings-backdrop" data-settings-close></div>
+      <section class="settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <button class="settings-close" type="button" aria-label="Закрыть выбор системы" data-settings-close>×</button>
+        <p class="eyebrow">Выбор системы</p>
+        <h2 id="settings-title">Настройте гайд под себя</h2>
+        <p>По умолчанию выбран Codex и Windows. Если у вас Mac или другой инструмент, переключите здесь.</p>
+        <div class="settings-groups">
+          <div>
+            <h3>Инструмент</h3>
+            <div class="switch-row" role="group" aria-label="Инструмент">
+              <button class="switch-button is-selected" type="button" data-provider="chatgpt">Codex</button>
+              <button class="switch-button" type="button" data-provider="claude">Claude Code</button>
+            </div>
+          </div>
+          <div>
+            <h3>Система</h3>
+            <div class="switch-row" role="group" aria-label="Операционная система">
+              <button class="switch-button is-selected" type="button" data-platform="windows">Windows</button>
+              <button class="switch-button" type="button" data-platform="mac">macOS</button>
+            </div>
+          </div>
+        </div>
+        <button class="button primary" type="button" data-settings-close>Готово</button>
+      </section>
     </div>
     <main id="top">
       <section class="hero setup-hero screen is-screen-active" data-screen="home">
@@ -55,111 +82,6 @@
         />
       </section>
 
-      <section class="setup-plan screen" data-screen="plan" aria-label="Общий план настройки">
-        <div class="section-heading">
-          <p class="eyebrow">Общий план</p>
-          <h2>Что нужно подготовить</h2>
-          <p>
-            Это не урок по созданию проекта. Это чеклист подготовки, чтобы на
-            тренинге не тратить время на доступы и настройки.
-          </p>
-        </div>
-
-        <nav class="step-jump setup-step-jump" aria-label="Быстрый переход по шагам" data-step-jump></nav>
-
-        <ol class="plan-grid plan-grid-wide">
-          <li>
-            <span>1</span>
-            <strong>Аккаунт ИИ-сервиса</strong>
-            <p>Создать аккаунт Claude или ChatGPT и проверить вход.</p>
-          </li>
-          <li>
-            <span>2</span>
-            <strong>Операционная система</strong>
-            <p>Выбрать Windows или macOS для подходящей инструкции.</p>
-          </li>
-          <li>
-            <span>3</span>
-            <strong>Установка <button class="term inline-term" type="button" data-term="git">Git</button></strong>
-            <p>Установить систему сохранения истории проекта.</p>
-          </li>
-          <li>
-            <span>4</span>
-            <strong>Приложение для кода</strong>
-            <p>Установить <button class="term inline-term" type="button" data-term="claude-code">Claude Code</button> или <button class="term inline-term" type="button" data-term="codex">Codex</button>.</p>
-          </li>
-          <li>
-            <span>5</span>
-            <strong>Аккаунт <button class="term inline-term" type="button" data-term="github">GitHub</button></strong>
-            <p>Создать аккаунт и подтвердить электронную почту.</p>
-          </li>
-          <li>
-            <span>6</span>
-            <strong>Папка проекта</strong>
-            <p>Создать рабочую папку и открыть её в приложении.</p>
-          </li>
-          <li>
-            <span>7</span>
-            <strong>Связь Codex и GitHub</strong>
-            <p>Авторизовать GitHub аккаунт через Codex и GitHub CLI.</p>
-          </li>
-        </ol>
-
-        <div class="screen-actions">
-          <button class="button secondary" type="button" data-prev-screen>
-            Назад
-          </button>
-          <button class="button primary" type="button" data-next-screen>
-            Выбрать инструмент
-          </button>
-        </div>
-      </section>
-
-      <section class="choice-screen screen" data-screen="choice" aria-label="Выбор инструмента">
-        <div class="section-heading">
-          <p class="eyebrow">Выбор пути</p>
-          <h2>С чем будете работать?</h2>
-          <p>
-            Выберите один вариант. После выбора инструкция подстроится под
-            нужный инструмент: <button class="term" type="button" data-term="claude-code">Claude Code</button> для Claude или <button class="term" type="button" data-term="codex">Codex</button> для ChatGPT.
-          </p>
-        </div>
-
-        <nav class="step-jump setup-step-jump" aria-label="Быстрый переход по шагам" data-step-jump></nav>
-
-        <div class="choice-grid">
-          <article class="choice-card">
-            <span class="choice-badge">Рекомендуется</span>
-            <h3>ChatGPT + Codex</h3>
-            <p>
-              ChatGPT - чат с ИИ. <button class="term" type="button" data-term="codex">Codex</button> - инструмент OpenAI/ChatGPT для работы
-              с кодом: помогает писать, менять и проверять проект.
-            </p>
-            <button class="button primary" type="button" data-provider="chatgpt">
-              Выбрать ChatGPT
-            </button>
-          </article>
-
-          <article class="choice-card">
-            <span class="choice-badge alt-badge">Альтернатива</span>
-            <h3>Claude + Claude Code</h3>
-            <p>
-              Claude - чат с ИИ. <button class="term" type="button" data-term="claude-code">Claude Code</button> - инструмент Claude для работы с
-              кодом: он читает файлы, пишет код и помогает собирать проект.
-            </p>
-            <button class="button primary" type="button" data-provider="claude">
-              Выбрать Claude
-            </button>
-          </article>
-        </div>
-
-        <div class="screen-actions">
-          <button class="button secondary" type="button" data-prev-screen>
-            Назад
-          </button>
-        </div>
-      </section>
-
       <section id="guide" class="guide-shell screen" data-screen="guide" aria-label="Пошаговая инструкция">
         <div class="guide-top">
           <div>
@@ -167,7 +89,7 @@
             <h2>Делайте по одному шагу</h2>
           </div>
           <div class="progress-label" aria-live="polite">
-            <span data-provider-label>ChatGPT</span>: шаг <span data-current-step>1</span> из <span data-total-steps>7</span>
+            <span data-provider-label>Codex</span>: шаг <span data-current-step>1</span> из <span data-total-steps>6</span>
           </div>
         </div>
 
@@ -240,28 +162,9 @@
           </aside>
         </article>
 
-        <article class="guide-step single-step" data-step="2">
+        <article class="guide-step" data-step="2">
           <div class="step-copy">
             <p class="eyebrow">Шаг 2</p>
-            <h3>Выберите операционную систему</h3>
-            <p>
-              Дальше инструкция будет отличаться для
-              <button class="term" type="button" data-term="windows">Windows</button> и
-              <button class="term" type="button" data-term="macos">macOS</button>.
-            </p>
-            <div class="platform-choice" role="group" aria-label="Операционная система">
-              <button class="platform-button is-selected" type="button" data-platform="windows">Windows</button>
-              <button class="platform-button" type="button" data-platform="mac">macOS</button>
-            </div>
-            <div class="beginner-note">
-              Выбрано: <strong data-platform-name>Windows</strong>. Выбор сохранится для следующих шагов.
-            </div>
-          </div>
-        </article>
-
-        <article class="guide-step" data-step="3">
-          <div class="step-copy">
-            <p class="eyebrow">Шаг 3</p>
             <h3>Установите <button class="term" type="button" data-term="git">Git</button></h3>
             <p>
               <button class="term" type="button" data-term="git">Git</button> помогает приложению сохранять изменения и отправлять проект в GitHub.
@@ -272,7 +175,7 @@
                 <li>Откройте скачанный файл <code>Git-2.55.0-64-bit.exe</code>.</li>
                 <li>Во всех окнах оставляйте настройки по умолчанию и нажимайте <code>Next</code> / <code>Далее</code>.</li>
                 <li>В конце нажмите <code>Install</code>, затем <code>Finish</code>.</li>
-                <li>Скачайте <button class="term" type="button" data-term="gh-cli">GitHub CLI</button>: <a href="https://github.com/cli/cli/releases/download/v2.96.0/gh_2.96.0_windows_amd64.msi" target="_blank" rel="noreferrer">gh_2.96.0_windows_amd64.msi</a>.</li>
+                <li>Скачайте <button class="term" type="button" data-term="gh-cli">GitHub CLI</button>: <a href="https://github.com/cli/cli/releases/download/v2.96.0/gh_2.96.0_windows_amd64.msi" target="_blank" rel="noreferrer">gh_2.96.0_windows_amd64.msi</a>. <button class="inline-help-button" type="button" data-token-help>Не получилось установить?</button></li>
                 <li>Откройте скачанный файл <code>gh_2.96.0_windows_amd64.msi</code> и завершите установку с настройками по умолчанию.</li>
               </ol>
             </div>
@@ -303,9 +206,9 @@
           </aside>
         </article>
 
-        <article class="guide-step" data-step="4">
+        <article class="guide-step" data-step="3">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 4</p>
+            <p class="eyebrow">Шаг 3</p>
             <h3>Установите <span data-code-tool>Claude Code</span></h3>
             <p>
               Скачайте приложение для выбранной системы: <strong data-platform-name>Windows</strong>.
@@ -329,9 +232,9 @@
           </aside>
         </article>
 
-        <article class="guide-step" data-step="5">
+        <article class="guide-step" data-step="4">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 5</p>
+            <p class="eyebrow">Шаг 4</p>
             <h3>Создайте аккаунт GitHub</h3>
             <p><button class="term" type="button" data-term="github">GitHub</button> нужен, чтобы хранить код и публиковать сайт через <button class="term" type="button" data-term="github-pages">GitHub Pages</button>.</p>
             <ol class="action-list">
@@ -349,45 +252,28 @@
           </aside>
         </article>
 
-        <article class="guide-step single-step" data-step="6">
+        <article class="guide-step single-step" data-step="5">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 6</p>
+            <p class="eyebrow">Шаг 5</p>
             <h3>Создайте папку и откройте её в <span data-code-tool>Claude Code</span></h3>
             <p>Эта <button class="term" type="button" data-term="project-folder">папка проекта</button> станет рабочим местом приложения: здесь появятся файлы будущего сайта.</p>
             <ol class="action-list">
               <li>Создайте новую папку в любом удобном месте: например, на рабочем столе или в документах.</li>
               <li>Назовите её как хотите. Например: <code>Первый проект Вайбкодинг</code>.</li>
-              <li>Откройте приложение <button class="term" type="button" data-term="code-tool"><span data-code-tool>Claude Code</span></button>.</li>
-              <li>Нажмите <code>Choose project</code> под полем для задания.</li>
-              <li>Выберите <code>New project</code>.</li>
-              <li>Нажмите <code>Использовать существующую папку</code> и укажите созданную папку проекта.</li>
+              <li data-provider-panel="chatgpt">Откройте приложение ChatGPT.</li>
+              <li data-provider-panel="chatgpt">Переключитесь на <button class="term" type="button" data-term="codex">Codex</button>, нажав на логотип сверху слева.</li>
+              <li data-provider-panel="chatgpt">Привяжите созданную папку проекта.</li>
+              <li data-provider-panel="claude" hidden>Откройте приложение <button class="term" type="button" data-term="claude-code">Claude Code</button>.</li>
+              <li data-provider-panel="claude" hidden>Выберите созданную папку внутри приложения.</li>
             </ol>
-
-            <div data-provider-panel="claude">
-              <p class="provider-hint">В верхней части приложения можно переключаться между режимами <strong>Chat</strong> и <strong>Claude Code</strong>.</p>
-              <div class="mode-explainer">
-                <p><strong><button class="term" type="button" data-term="chat-mode">Chat</button></strong> — обычный разговор с Claude: обсудить идею, задать вопрос или подготовить план.</p>
-                <p><strong><button class="term" type="button" data-term="claude-code">Claude Code</button></strong> — режим работы с файлами: создаёт и меняет код внутри выбранной папки.</p>
-              </div>
-              <a class="screenshot-link" href="assets/claude-code-select-folder.png" target="_blank" rel="noreferrer" aria-label="Открыть скриншот выбора папки в Claude Code крупнее">
-                <img class="instruction-shot wide-shot" src="assets/claude-code-select-folder.png" alt="Кнопка выбора папки проекта в Claude Code" />
-              </a>
-              <p class="image-caption">Нажмите на название папки или значок папки, затем выберите созданную папку проекта.</p>
-            </div>
-
-            <div data-provider-panel="chatgpt" hidden>
-              <a class="screenshot-link" href="assets/codex-select-project.png" target="_blank" rel="noreferrer" aria-label="Открыть подсказку по выбору папки в Codex крупнее">
-                <img class="instruction-shot wide-shot" src="assets/codex-select-project.png" alt="Три действия для прикрепления существующей папки проекта в Codex" />
-              </a>
-            </div>
 
             <div class="beginner-note">Готово, если приложение показывает название вашей папки и готово принимать задания.</div>
           </div>
         </article>
 
-        <article class="guide-step" data-step="7">
+        <article class="guide-step" data-step="6">
           <div class="step-copy">
-            <p class="eyebrow">Шаг 7</p>
+            <p class="eyebrow">Шаг 6</p>
             <h3>Подключите GitHub аккаунт к Codex</h3>
             <p>
               Теперь нужно авторизовать <button class="term" type="button" data-term="github">GitHub</button>
@@ -425,6 +311,41 @@
           <button class="button primary" type="button" data-next-step>
             Следующий шаг
           </button>
+        </div>
+      </section>
+
+      <section class="info-page token-help-page screen" data-screen="token-help" aria-label="Создание GitHub token">
+        <div class="section-heading">
+          <p class="eyebrow">Если GitHub CLI не установился</p>
+          <h2>Создайте GitHub token</h2>
+          <p>
+            Это запасной вариант, если GitHub CLI не получилось установить. Token позволит вручную дать приложению доступ к GitHub.
+          </p>
+        </div>
+        <div class="token-help-layout">
+          <article class="step-copy">
+            <h3>Что сделать на GitHub</h3>
+            <ol class="action-list">
+              <li>Откройте страницу: <a href="https://github.com/settings/tokens/new" target="_blank" rel="noreferrer">github.com/settings/tokens/new</a>.</li>
+              <li>В <strong><code>Note/Примечание</code></strong> напишите любое понятное название.</li>
+              <li>В <strong><code>Expiration/Срок действия</code></strong> выберите <strong><code>No expiration/Срок действия не ограничен</code></strong>.</li>
+              <li>Поставьте галочку рядом с <strong><code>repo/репозиторий</code></strong> и <strong><code>workflow/рабочий процесс</code></strong>.</li>
+              <li>Внизу нажмите зелёную кнопку <strong><code>Generate token/Создать токен</code></strong>.</li>
+              <li>Сразу скопируйте token и сохраните его: GitHub покажет его только один раз.</li>
+            </ol>
+            <div class="beginner-note">Не показывайте token другим людям и не вставляйте его в публичные чаты.</div>
+          </article>
+          <aside class="screen-card">
+            <span class="screen-label">Пример</span>
+            <h4>Настройки token</h4>
+            <a class="screenshot-link" href="assets/github-token-guide.png" target="_blank" rel="noreferrer" aria-label="Открыть скриншот настроек GitHub token крупнее">
+              <img class="instruction-shot" src="assets/github-token-guide.png" alt="Поля создания GitHub token, галочки repo и workflow, кнопка Generate token и копирование token" />
+            </a>
+            <p>Нажмите на изображение, чтобы открыть его крупнее.</p>
+          </aside>
+        </div>
+        <div class="screen-actions">
+          <button class="button secondary" type="button" data-back-to-git>Вернуться к шагу Git</button>
         </div>
       </section>
 
