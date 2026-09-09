@@ -58,7 +58,8 @@ main {
   margin-left: auto;
 }
 
-.site-nav button {
+.site-nav button,
+.nav-link-button {
   padding: 8px 12px;
   border: 0;
   border-radius: 7px;
@@ -66,11 +67,13 @@ main {
   color: rgba(255, 255, 255, 0.76);
   font: inherit;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
 }
 
 .site-nav button:hover,
-.site-nav button.is-active {
+.site-nav button.is-active,
+.nav-link-button:hover {
   background: rgba(255, 255, 255, 0.13);
   color: white;
 }
@@ -1370,7 +1373,8 @@ h3 {
   .site-header { height: 108px; padding-block: 10px; flex-wrap: wrap; }
   .site-brand { width: 100%; }
   .site-nav { width: 100%; margin-left: 0; }
-  .site-nav button { flex: 1; }
+  .site-nav button,
+  .nav-link-button { flex: 1; text-align: center; }
   .glossary-grid { grid-template-columns: 1fr; }
 
   .hero-actions {
